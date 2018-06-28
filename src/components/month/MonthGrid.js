@@ -8,19 +8,19 @@ class Month extends React.Component {
     renderWeeks() {
         const selectedMonth = this.props.date.month(),
             start =  moment(this.props.date).startOf('month').startOf('isoWeek'),
-            end = moment(this.props.date).endOf('month').endOf('isoWeek'),
+            end = moment(this.props.date).endOf('month').add(1, 'week').week(),
             weeks = []
 
-        for (const date = start; date.isBefore(end); date.add(1, 'week')) {
+        for (const date = start; date.week() !== end; date.add(1, 'week')) {
             weeks.push(moment(date))
         }
 
-        return weeks.map((date, index) => {
+        return weeks.map(date => {
             return <MonthWeek
-                key={index}
+                key={date.week()}
                 date={date}
                 selectedMonth={selectedMonth}
-                events={this.props.events}
+                events={this.props.events.filter(event => event.date.week() === date.week())}
                 language={this.props.language}
             />
         })

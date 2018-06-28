@@ -6,21 +6,23 @@ import MonthDay from './MonthDay'
 
 class MonthWeek extends React.Component {
     render() {
-		const start = moment(this.props.date).startOf('isoWeek'),
-			end = moment(this.props.date).endOf('isoWeek'),
+		const end = moment(this.props.date).endOf('isoWeek').add(1, 'd').date(),
         	days = []
 
-        for (const date = moment(start); date.isBefore(end); date.add(1, 'd')) {
-            days.push(moment(date))
+        for (const date = moment(this.props.date); date.date() !== end; date.add(1, 'd')) {
+            days.push({
+                day: date.date(),
+                month: date.month(),
+            })
         }
 
     	return <div className="Calendar-Month-Grid-Week">
-    		{days.map((date, index) => {
+    		{days.map(date => {
     			return <MonthDay
-    				key={index}
-    				date={date}
-    				outOfMonth={date.month() !== this.props.selectedMonth}
-                    events={this.props.events}
+    				key={date.day}
+                    date={date.day}
+    				outOfMonth={date.month !== this.props.selectedMonth}
+                    events={this.props.events.filter(e => e.date.date() === date.day)}
                     language={this.props.language}
     			/>
     		})}

@@ -11,7 +11,7 @@ export const views = {
 }
 
 const daysIndexes = []
-for (let i = 0; i < 7; i++) {
+for (let i = 1; i < 8; i++) {
 	daysIndexes.push(moment().isoWeekday(i).format('dddd'))
 }
 export const weekdays = daysIndexes.map(day => day.charAt(0).toUpperCase() + day.slice(1))

@@ -2,44 +2,21 @@ import React from 'react'
 import moment from 'moment'
 import Calendar from './components/Calendar'
 
-const events = [
-    {
+const colors = [null, 'Event-green', 'Event-purple']
+const start = moment('2018-05-01').startOf('month')
+const events = []
+for (let i = 1; i < 5000; i++) {
+    events.push({
+        id: i,
         label: "Un événement",
-        date: moment(),
-    },
-    {
-        label: "Un événement",
-        date: moment(),
-        className: 'Event-green'
-    },
-    {
-        label: "Un événement",
-        date: moment(),
-    },
-    {
-        label: "Un événement",
-        date: moment(),
-        className: 'Event-green'
-    },
-    {
-        label: "Un événement",
-        date: moment(),
-    },
-    {
-        label: "Un événement",
-        date: moment().subtract(1, 'd'),
-    },
-    {
-        label: "Un événement",
-        date: moment().subtract(1, 'd'),
-        className: 'Event-green'
-    },
-    {
-        label: "Un événement",
-        date: moment().subtract(5, 'd'),
-        className: 'Event-green'
-    },
-]
+        date: moment(start),
+        className: colors[i % 3],
+    })
+    start.add(1, 'h')
+    if (start.day() === 6) {
+        start.add(2, 'd')
+    }
+}
 
 class App extends React.Component {
     render() {

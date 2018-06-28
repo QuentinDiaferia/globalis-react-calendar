@@ -39,7 +39,7 @@ class Calendar extends React.Component {
     renderMonth() {
         return <Month
             date={this.state.date}
-            events={this.state.events}
+            events={this.state.events.filter(event => event.date.isSame(this.state.date, 'month'))}
             language={this.props.language}
         />
     }
@@ -47,7 +47,7 @@ class Calendar extends React.Component {
     renderWeek() {
         return <Week
             date={this.state.date}
-            events={this.state.events}
+            events={this.state.events.filter(event => event.date.isSame(this.state.date, 'week'))}
             language={this.props.language}
         />
     }

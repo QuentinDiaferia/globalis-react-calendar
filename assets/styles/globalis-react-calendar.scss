@@ -3,6 +3,7 @@ $calendar-color-inactive-day: #e5e5e5;;
 $calendar-color-inactive-day-index: #999999;
 $calendar-color-event: #3174ad;
 $calendar-color-event-green: #33b679;
+$calendar-color-event-purple: #3f51b5;
 $calendar-color-more: #3174ad;
 $calendar-font-size: 14px;
 $calendar-font-family: Arial;
@@ -143,13 +144,19 @@ $calendar-font-family: Arial;
         text-align: left;
 
         &-More {
+            display: block;
             color: $calendar-color-event;
             padding: 4px;
             text-align: left;
+            cursor: pointer;
         }
 
         &-green {
             background-color: $calendar-color-event-green;
+        }
+
+        &-purple {
+            background-color: $calendar-color-event-purple;
         }
     }
 }
