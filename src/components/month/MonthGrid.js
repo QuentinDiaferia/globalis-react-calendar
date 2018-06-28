@@ -7,11 +7,11 @@ import MonthWeek from './MonthWeek'
 class Month extends React.Component {
     renderWeeks() {
         const selectedMonth = this.props.date.month(),
-            start =  moment(this.props.date).startOf('month').startOf('week'),
-            end = moment(this.props.date).endOf('month').endOf('week'),
+            start =  moment(this.props.date).startOf('month').startOf('isoWeek'),
+            end = moment(this.props.date).endOf('month').endOf('isoWeek'),
             weeks = []
 
-        for (const date = moment(start); date.isBefore(end); date.add(1, 'week')) {
+        for (const date = start; date.isBefore(end); date.add(1, 'week')) {
             weeks.push(moment(date))
         }
 

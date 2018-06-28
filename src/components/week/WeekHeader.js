@@ -5,9 +5,12 @@ class WeekHeader extends React.Component {
     render() {
         return <div className="Calendar-Week-Header">
         	<div className="Calendar-Week-Header-Cell"></div>
-        	{this.props.days.map((day, index) => <div className="Calendar-Week-Header-Cell" key={index}>
-        		{day.format('DD')}
-        	</div>)}
+        	{this.props.days.map((day, index) => {
+        		const weekDay = day.format('ddd DD')
+        		return <div className="Calendar-Week-Header-Cell" key={index}>
+	        		{weekDay.charAt(0).toUpperCase() + weekDay.slice(1)}
+	        	</div>
+	        })}
         </div>
     }
 }

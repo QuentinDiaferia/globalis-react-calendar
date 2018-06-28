@@ -6,8 +6,8 @@ import MonthDay from './MonthDay'
 
 class MonthWeek extends React.Component {
     render() {
-		const start = moment(this.props.date).startOf('week'),
-			end = moment(this.props.date).endOf('week'),
+		const start = moment(this.props.date).startOf('isoWeek'),
+			end = moment(this.props.date).endOf('isoWeek'),
         	days = []
 
         for (const date = moment(start); date.isBefore(end); date.add(1, 'd')) {
