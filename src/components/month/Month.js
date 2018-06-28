@@ -10,6 +10,8 @@ class Month extends React.Component {
             <MonthHeader />
             <MonthGrid
                 date={this.props.date}
+                events={this.props.events}
+                language={this.props.language}
             />
         </div>
     }
@@ -17,6 +19,8 @@ class Month extends React.Component {
 
 Month.propTypes = {
     date: PropTypes.object.isRequired,
+    events: PropTypes.array.isRequired,
+    language: PropTypes.object.isRequired,
 }
 
 export default Month

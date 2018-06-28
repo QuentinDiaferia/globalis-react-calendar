@@ -20,6 +20,8 @@ class MonthWeek extends React.Component {
     				key={index}
     				date={date}
     				outOfMonth={date.month() !== this.props.selectedMonth}
+                    events={this.props.events}
+                    language={this.props.language}
     			/>
     		})}
     	</div>
@@ -29,6 +31,8 @@ class MonthWeek extends React.Component {
 MonthWeek.propTypes = {
     date: PropTypes.object.isRequired,
     selectedMonth: PropTypes.number.isRequired,
+    events: PropTypes.array.isRequired,
+    language: PropTypes.object.isRequired,
 }
 
 export default MonthWeek

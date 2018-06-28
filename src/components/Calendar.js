@@ -13,6 +13,7 @@ class Calendar extends React.Component {
         this.state = {
             view: props.view,
             date: moment(props.date),
+            events: props.events,
         }
         this.renderCalendar = this.renderCalendar.bind(this)
         this.changeView = this.changeView.bind(this)
@@ -38,12 +39,16 @@ class Calendar extends React.Component {
     renderMonth() {
         return <Month
             date={this.state.date}
+            events={this.state.events}
+            language={this.props.language}
         />
     }
 
     renderWeek() {
         return <Week
             date={this.state.date}
+            events={this.state.events}
+            language={this.props.language}
         />
     }
 
@@ -74,11 +79,13 @@ class Calendar extends React.Component {
 Calendar.propTypes = {
     view: PropTypes.oneOf(['month', 'week']).isRequired,
     language: PropTypes.object.isRequired,
+    events: PropTypes.array.isRequired,
 }
 
 Calendar.defaultProps = {
     view: 'month',
     date: moment(),
+    events: [],
 }
 
 export default Calendar

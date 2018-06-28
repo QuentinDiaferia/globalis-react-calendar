@@ -1,9 +1,16 @@
 $calendar-color-border: #ddd;
 $calendar-color-inactive-day: #e5e5e5;;
 $calendar-color-inactive-day-index: #999999;
+$calendar-color-event: #3174ad;
+$calendar-color-event-green: #33b679;
+$calendar-color-more: #3174ad;
+$calendar-font-size: 14px;
+$calendar-font-family: Arial;
 
 .Calendar {
     height: 100%;
+    font-size: $calendar-font-size;
+    font-family: $calendar-font-family;
 
     .ToolBar {
         display: flex;
@@ -41,14 +48,13 @@ $calendar-color-inactive-day-index: #999999;
             &-Week {
                 display: flex;
                 justify-content: space-between;
-                height: 80px;
+                height: 100px;
                 max-height: 15%;
                 border-bottom: 1px solid $calendar-color-border;
 
                 &-Day {
                     width: 100%;
                     text-align: center;
-                    padding: 2px;
 
                     & + & {
                         border-left: 1px solid $calendar-color-border;
@@ -56,6 +62,7 @@ $calendar-color-inactive-day-index: #999999;
 
                     .day-index {
                         text-align: right;
+                        padding: 2px;
                     }
 
                     &.Day-inactive {
@@ -123,6 +130,26 @@ $calendar-color-inactive-day-index: #999999;
                     padding: 2px;
                 }
             }
+        }
+    }
+
+    .Event {
+        width: calc(100% - 8px);
+        color: #fff;
+        background-color: $calendar-color-event;
+        border-radius: 5px;
+        padding: 4px;
+        margin-bottom: 1px;
+        text-align: left;
+
+        &-More {
+            color: $calendar-color-event;
+            padding: 4px;
+            text-align: left;
+        }
+
+        &-green {
+            background-color: $calendar-color-event-green;
         }
     }
 }

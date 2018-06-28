@@ -15,13 +15,15 @@ class Month extends React.Component {
             weeks.push(moment(date))
         }
 
-        return weeks.map((date, index) =>
-            <MonthWeek
+        return weeks.map((date, index) => {
+            return <MonthWeek
                 key={index}
                 date={date}
                 selectedMonth={selectedMonth}
+                events={this.props.events}
+                language={this.props.language}
             />
-        )
+        })
     }
 
     render() {
@@ -33,6 +35,8 @@ class Month extends React.Component {
 
 Month.propTypes = {
     date: PropTypes.object.isRequired,
+    events: PropTypes.array.isRequired,
+    language: PropTypes.object.isRequired,
 }
 
 export default Month
