@@ -8,10 +8,11 @@ class WeekGrid extends React.Component {
     render() {
     	return <div className="Calendar-Week-Grid">
             <WeekTimeHeader />
-    		{this.props.days.map((date, index) => {
+    		{this.props.days.map(date => {
     			return <WeekDay
-                    key={index}
+                    key={date.date()}
                     date={date}
+                    events={this.props.events.filter(e => e.start.date() === date.date())}
                 />
     		})}
     	</div>
@@ -20,6 +21,7 @@ class WeekGrid extends React.Component {
 
 WeekGrid.propTypes = {
     days: PropTypes.array.isRequired,
+    events: PropTypes.array.isRequired,
 }
 
 export default WeekGrid

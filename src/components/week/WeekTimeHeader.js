@@ -16,6 +16,7 @@ class WeekTimeHeader extends React.Component {
 
     render() {
         return <div className="Calendar-Week-Grid-TimeHeader">
+       		<div className="Calendar-Week-Grid-TimeHeader-Time"></div>
         	{this.renderHeader()}
         </div>
     }

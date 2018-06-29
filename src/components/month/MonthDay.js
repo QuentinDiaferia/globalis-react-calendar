@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Event from '../Event'
+
 class MonthDay extends React.Component {
     renderEvents(events) {
-        return events.slice(0, 2).map((event, index) => {
-            const className = 'Event' + (event.className ? ' ' + event.className : '')
-            return <div className={className} key={event.id}>
-                {event.label}
-            </div>
+        return events.slice(0, 2).map(event => {
+            return <Event
+                key={event.id}
+                event={event}
+            />
         })
     }
 

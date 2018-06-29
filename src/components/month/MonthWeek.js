@@ -22,7 +22,7 @@ class MonthWeek extends React.Component {
     				key={date.day}
                     date={date.day}
     				outOfMonth={date.month !== this.props.selectedMonth}
-                    events={this.props.events.filter(e => e.date.date() === date.day)}
+                    events={this.props.events.filter(e => e.start.date() === date.day)}
                     language={this.props.language}
     			/>
     		})}

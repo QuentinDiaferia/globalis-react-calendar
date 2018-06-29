@@ -7,19 +7,17 @@ import WeekGrid from './WeekGrid'
 
 class Week extends React.Component {
     render() {
-		const start = moment(this.props.date).startOf('week'),
-			end = moment(this.props.date).endOf('week'),
+		const end = moment(this.props.date).endOf('week').add(1, 'd').date(),
         	days = []
 
-        for (const date = moment(start); date.isBefore(end); date.add(1, 'd')) {
+        for (const date = moment(this.props.date).startOf('week'); date.date() !== end; date.add(1, 'd')) {
             days.push(moment(date))
         }
+
         return <div className="Calendar-Week">
-            <WeekHeader
-                days={days}
-              />
             <WeekGrid
                 days={days}
+                events={this.props.events}
             />
         </div>
     }
@@ -27,6 +25,7 @@ class Week extends React.Component {
 
 Week.propTypes = {
     date: PropTypes.object.isRequired,
+    events: PropTypes.array.isRequired,
 }
 
 export default Week

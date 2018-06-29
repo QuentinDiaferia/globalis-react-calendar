@@ -20,7 +20,7 @@ class Month extends React.Component {
                 key={date.week()}
                 date={date}
                 selectedMonth={selectedMonth}
-                events={this.props.events.filter(event => event.date.week() === date.week())}
+                events={this.props.events.filter(event => event.start.week() === date.week())}
                 language={this.props.language}
             />
         })

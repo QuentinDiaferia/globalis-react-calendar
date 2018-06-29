@@ -5,8 +5,15 @@ $calendar-color-event: #3174ad;
 $calendar-color-event-green: #33b679;
 $calendar-color-event-purple: #3f51b5;
 $calendar-color-more: #3174ad;
+
 $calendar-font-size: 14px;
 $calendar-font-family: Arial;
+
+$calendar-padding-event: 4px;
+
+$calendar-height-header: 25px;
+$calendar-height-timeslot: 40px;
+$calendar-height-day: 100px;
 
 .Calendar {
     height: 100%;
@@ -33,6 +40,9 @@ $calendar-font-family: Arial;
 
             &-Cell {
                 width: 100%;
+                height: $calendar-height-header;
+                line-height: $calendar-height-header;
+                vertical-align: middle;
                 text-align: center;
                 font-weight: bold;
                 padding: 2px;
@@ -49,7 +59,7 @@ $calendar-font-family: Arial;
             &-Week {
                 display: flex;
                 justify-content: space-between;
-                height: 100px;
+                height: $calendar-height-day;
                 max-height: 15%;
                 border-bottom: 1px solid $calendar-color-border;
 
@@ -84,69 +94,72 @@ $calendar-font-family: Arial;
         border: 1px solid $calendar-color-border;
         border-bottom: 0;
 
-        &-Header {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid $calendar-color-border;
-
-            &-Cell {
-                width: 100%;
-                text-align: center;
-                font-weight: bold;
-                padding: 2px;
-
-                & + & {
-                    border-left: 1px solid $calendar-color-border;
-                }
-            }
-        }
-
         &-Grid {
             height: 100%;
             display: flex;
             justify-content: space-between;
 
             &-TimeHeader {
-                width: 12.5%;
-                border-right: 1px solid $calendar-color-border;
                 text-align: center;
+                width: 50%;
 
                 &-Time {
-                    height: 40px;
+                    height: $calendar-height-timeslot;
                     border-bottom:  1px solid $calendar-color-border;
                     padding: 2px;
+
+                    &:first-child {
+                        height: $calendar-height-header;
+                    }
                 }
             }
 
             &-Day {
-                width: 12.5%;
                 text-align: center;
-                & + & {
-                    border-left: 1px solid $calendar-color-border;
+                width: 100%;
+                border-left: 1px solid $calendar-color-border;
+
+                &-Header {
+                    height: $calendar-height-header;
+                    line-height: $calendar-height-header;
+                    vertical-align: middle;
+                    text-align: center;
+                    font-weight: bold;
+                    padding: 2px;
+                    border-bottom: 1px solid $calendar-color-border;
+                }
+
+                &-Content {
+                    position: relative;
                 }
 
                 &-TimeSlot {
-                    height: 40px;
-                    border-bottom:  1px solid $calendar-color-border;
+                    height: $calendar-height-timeslot;
+                    border-bottom: 1px solid $calendar-color-border;
                     padding: 2px;
+                }
+
+                .Event {
+                    position: absolute;
                 }
             }
         }
     }
 
     .Event {
-        width: calc(100% - 8px);
+        width: calc(100% - (2 * #{$calendar-padding-event}));
+        max-height: calc(100% - (2 * #{$calendar-padding-event}));
         color: #fff;
         background-color: $calendar-color-event;
         border-radius: 5px;
-        padding: 4px;
+        padding: $calendar-padding-event;
         margin-bottom: 1px;
         text-align: left;
 
         &-More {
             display: block;
             color: $calendar-color-event;
-            padding: 4px;
+            padding: $calendar-padding-event;
             text-align: left;
             cursor: pointer;
         }
