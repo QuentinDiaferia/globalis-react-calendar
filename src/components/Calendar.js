@@ -13,7 +13,7 @@ class Calendar extends React.Component {
         this.state = {
             view: props.view,
             date: moment(props.date),
-            events: props.events,
+            events: props.events.sort((e1, e2) => e1.start.diff(e2.start)),
         }
         this.renderCalendar = this.renderCalendar.bind(this)
         this.changeView = this.changeView.bind(this)

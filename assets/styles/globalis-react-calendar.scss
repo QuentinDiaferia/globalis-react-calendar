@@ -147,7 +147,7 @@ $calendar-height-day: 100px;
     }
 
     .Event {
-        width: calc(100% - (2 * #{$calendar-padding-event}));
+        max-width: calc(100% - (2 * #{$calendar-padding-event}));
         max-height: calc(100% - (2 * #{$calendar-padding-event}));
         color: #fff;
         background-color: $calendar-color-event;
@@ -155,6 +155,7 @@ $calendar-height-day: 100px;
         padding: $calendar-padding-event;
         margin-bottom: 1px;
         text-align: left;
+        z-index: 2;
 
         &-More {
             display: block;

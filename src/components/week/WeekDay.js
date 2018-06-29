@@ -20,18 +20,44 @@ class WeekDay extends React.Component {
 	}
 
 	renderEvents() {
-        return this.props.events.map(event => {
-            const duration = moment.duration(event.end.diff(event.start)).as('hours'),
-            	beginning = moment.duration(event.start.diff(moment(event.start).startOf('day'))).as('hours')
+		let totalOverlap = 1,
+			currentOverlap = 1
+        return this.props.events.map((event, index) => {
+            const duration = moment.duration(event.end.diff(event.start)).as('hours')
+            const beginning = moment.duration(event.start.diff(moment(event.start).startOf('day'))).as('hours')
+            const style = {
+        		top: `calc((100% / 24) * ${beginning})`,
+        		height: `calc((100% / 24) * ${duration} - 8px)`,
+	        	width: '100%',
+	        	left: '0',
+        	}
+
+        	if (totalOverlap === 1 || currentOverlap === 0) {
+            	totalOverlap = currentOverlap = this.checkOverlap(event, this.props.events.slice(index + 1))
+        	}
+
+            if (totalOverlap > 1) {
+            	style.width = `calc((100% / ${totalOverlap}) - 8px)`
+            	style.left = `calc((100% / ${totalOverlap}) * ${totalOverlap - currentOverlap})`
+            	currentOverlap--
+            }
+
 			return <Event
             	event={event}
             	key={event.id}
-            	style={{
-            		top: `calc((100% / 24) * ${beginning})`,
-            		height: `calc((100% / 24) * ${duration} - 8px)`,
-            	}}
+            	style={style}
             />
         })
+	}
+
+	checkOverlap(event, list) {
+		let overlap = 1
+		list.forEach(e => {
+			if (e.start.diff(event.end) < 0) {
+				overlap++
+			}
+		})
+		return overlap
 	}
 
 	renderHeader() {
