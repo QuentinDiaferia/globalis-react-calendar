@@ -18,6 +18,8 @@ class Week extends React.Component {
             <WeekGrid
                 days={days}
                 events={this.props.events}
+                startTime={this.props.startTime}
+                endTime={this.props.endTime}
             />
         </div>
     }
@@ -26,6 +28,8 @@ class Week extends React.Component {
 Week.propTypes = {
     date: PropTypes.object.isRequired,
     events: PropTypes.array.isRequired,
+    startTime: PropTypes.number.isRequired,
+    endTime: PropTypes.number.isRequired,
 }
 
 export default Week

@@ -45,10 +45,17 @@ class Calendar extends React.Component {
     }
 
     renderWeek() {
+        const events = this.state.events.filter(event => {
+            return event.start.isSame(this.state.date, 'week')
+            && event.start.hour() >= this.props.startTime
+            && event.end.hour() <= this.props.endTime
+        })
         return <Week
             date={this.state.date}
-            events={this.state.events.filter(event => event.start.isSame(this.state.date, 'week'))}
+            events={events}
             language={this.props.language}
+            startTime={this.props.startTime}
+            endTime={this.props.endTime}
         />
     }
 
@@ -80,12 +87,16 @@ Calendar.propTypes = {
     view: PropTypes.oneOf(['month', 'week']).isRequired,
     language: PropTypes.object.isRequired,
     events: PropTypes.array.isRequired,
+    startTime: PropTypes.number.isRequired,
+    endTime: PropTypes.number.isRequired,
 }
 
 Calendar.defaultProps = {
     view: 'month',
     date: moment(),
     events: [],
+    startTime: 8,
+    endTime: 20,
 }
 
 export default Calendar
