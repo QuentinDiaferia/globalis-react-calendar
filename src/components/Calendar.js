@@ -24,7 +24,10 @@ class Calendar extends React.Component {
     }
 
     changeView(view) {
-        this.setState({view})
+        this.setState({
+            date: this.state.date.startOf('week'),
+            view
+        })
     }
 
     onNavigate(direction) {

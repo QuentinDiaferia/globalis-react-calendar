@@ -71,7 +71,6 @@ $calendar-width-header-slot: 100px;
             &-Content {
                 position: relative;
                 overflow: hidden;
-                z-index: 1;
 
                 &-TimeSlot {
                     height: $calendar-height-timeslot;
