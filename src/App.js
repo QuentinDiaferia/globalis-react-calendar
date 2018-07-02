@@ -65,7 +65,7 @@ for (let i = 1; i < 2000; i++) {
 class App extends React.Component {
     render() {
         return <Calendar
-            view='week'
+            view='month'
             events={events3}
             startTime={8}
             endTime={20}

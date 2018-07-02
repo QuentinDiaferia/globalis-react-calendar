@@ -10,20 +10,18 @@ class MonthWeek extends React.Component {
         	days = []
 
         for (const date = moment(this.props.date); date.date() !== end; date.add(1, 'd')) {
-            days.push({
-                day: date.date(),
-                month: date.month(),
-            })
+            days.push(moment(date))
         }
 
     	return <div className="Calendar-Month-Grid-Week">
     		{days.map(date => {
     			return <MonthDay
-    				key={date.day}
-                    date={date.day}
-    				outOfMonth={date.month !== this.props.selectedMonth}
-                    events={this.props.events.filter(e => e.start.date() === date.day)}
+    				key={date.date()}
+                    date={date}
+    				outOfMonth={date.month() !== this.props.selectedMonth}
+                    events={this.props.events.filter(e => e.start.date() === date.date())}
                     language={this.props.language}
+                    onClickMore={this.props.onClickMore}
     			/>
     		})}
     	</div>
@@ -35,6 +33,7 @@ MonthWeek.propTypes = {
     selectedMonth: PropTypes.number.isRequired,
     events: PropTypes.array.isRequired,
     language: PropTypes.object.isRequired,
+    onClickMore: PropTypes.func.isRequired,
 }
 
 export default MonthWeek

@@ -15,7 +15,10 @@ class MonthDay extends React.Component {
 
     renderMoreLink(events) {
         if (events.length > 2) {
-            return <a className="Event-More">
+            return <a
+                className="Event-More"
+                onClick={() => this.props.onClickMore(this.props.date)}
+            >
                 +{events.length - 2} {this.props.language.label_more_link}
             </a>
         }
@@ -29,7 +32,7 @@ class MonthDay extends React.Component {
         }
         return <div className={className}>
             <div className="day-index">
-                {this.props.date}
+                {this.props.date.date()}
             </div>
             {this.renderEvents(this.props.events)}
             {this.renderMoreLink(this.props.events)}
@@ -38,10 +41,11 @@ class MonthDay extends React.Component {
 }
 
 MonthDay.propTypes = {
-    date: PropTypes.number.isRequired,
+    date: PropTypes.object.isRequired,
     outOfMonth: PropTypes.bool.isRequired,
     events: PropTypes.array.isRequired,
     language: PropTypes.object.isRequired,
+    onClickMore: PropTypes.func.isRequired,
 }
 
 export default MonthDay

@@ -22,6 +22,7 @@ class Month extends React.Component {
                 selectedMonth={selectedMonth}
                 events={this.props.events.filter(event => event.start.week() === date.week())}
                 language={this.props.language}
+                onClickMore={this.props.onClickMore}
             />
         })
     }
@@ -37,6 +38,7 @@ Month.propTypes = {
     date: PropTypes.object.isRequired,
     events: PropTypes.array.isRequired,
     language: PropTypes.object.isRequired,
+    onClickMore: PropTypes.func.isRequired,
 }
 
 export default Month

@@ -18,6 +18,7 @@ class Calendar extends React.Component {
         this.renderCalendar = this.renderCalendar.bind(this)
         this.changeView = this.changeView.bind(this)
         this.onNavigate = this.onNavigate.bind(this)
+        this.onClickMore = this.onClickMore.bind(this)
     }
 
     changeView(view) {
@@ -36,11 +37,19 @@ class Calendar extends React.Component {
         }
     }
 
+    onClickMore(date) {
+        this.setState({
+            view: views.WEEK,
+            date,
+        })
+    }
+
     renderMonth() {
         return <Month
             date={this.state.date}
             events={this.state.events.filter(event => event.start.isSame(this.state.date, 'month'))}
             language={this.props.language}
+            onClickMore={this.onClickMore}
         />
     }
 
