@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Navigation from './Navigation'
 import DateHeader from './DateHeader'
 import ViewSwitcher from './ViewSwitcher'
+import Settings from './Settings'
 
 class ToolBar extends React.Component {
     render() {
@@ -12,10 +13,15 @@ class ToolBar extends React.Component {
             date,
             onNavigate,
             changeView,
+            changeSettings,
+            toggleSettingsForm,
             language,
         } = this.props
+        const NavigationComponent = this.props.components.navigation || Navigation
+        const ViewSwitcherComponent = this.props.components.viewSwitcher || ViewSwitcher
+        const SettingsComponent = this.props.components.settings || Settings
         return <div className="ToolBar">
-            <Navigation
+            <NavigationComponent
                 onNavigate={onNavigate}
                 language={language}
             />
@@ -23,10 +29,16 @@ class ToolBar extends React.Component {
                 view={view}
                 date={date}
             />
-            <ViewSwitcher
-                changeView={changeView}
-                language={language}
-            />
+            <div className="ToolBar-SubGroup">
+                <ViewSwitcherComponent
+                    changeView={changeView}
+                    language={language}
+                />
+                <SettingsComponent
+                    language={language}
+                    toggleSettingsForm={toggleSettingsForm}
+                />
+            </div>
         </div>
     }
 }
@@ -37,6 +49,12 @@ ToolBar.propTypes = {
     language: PropTypes.object.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeView: PropTypes.func.isRequired,
+    toggleSettingsForm: PropTypes.func.isRequired,
+    components: PropTypes.object.isRequired,
+}
+
+ToolBar.defaultProps = {
+    components: {},
 }
 
 export default ToolBar

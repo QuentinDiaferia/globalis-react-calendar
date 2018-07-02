@@ -1,6 +1,9 @@
 import React from 'react'
 import moment from 'moment'
 import Calendar from './components/Calendar'
+import ToolBar from './components/ToolBar'
+import Navigation from './components/Navigation'
+import ViewSwitcher from './components/ViewSwitcher'
 
 const colors = [null, 'Event-green', 'Event-purple']
 const start = moment('2018-05-01').startOf('month')
@@ -73,7 +76,7 @@ for (let i = 1; i < 2000; i++) {
 class App extends React.Component {
     render() {
         return <Calendar
-            view='day'
+            view='month'
             events={events2}
             startTime={8}
             endTime={20}
@@ -85,7 +88,13 @@ class App extends React.Component {
                 label_view_month: 'Mois',
                 label_view_week: 'Semaine',
                 label_view_day: 'Jour',
-                label_more_link: 'autres'
+                label_more_link: 'autres',
+                label_settings: 'Config',
+            }}
+            components={{
+                toolbar: ToolBar,
+                navigation: Navigation,
+                viewSwitcher: ViewSwitcher,
             }}
         />
     }

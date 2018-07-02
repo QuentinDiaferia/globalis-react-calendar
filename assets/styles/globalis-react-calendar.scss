@@ -28,6 +28,10 @@ $calendar-width-header-slot: 100px;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
+
+        &-SubGroup {
+            display: flex;
+        }
     }
 
     &-Day {
