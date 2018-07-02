@@ -20,6 +20,7 @@ class Week extends React.Component {
                 startTime={this.props.startTime}
                 endTime={this.props.endTime}
                 displayWeekend={this.props.displayWeekend}
+                onDropEvent={this.props.onDropEvent}
             />
         </div>
     }
@@ -31,6 +32,7 @@ Week.propTypes = {
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
+    onDropEvent: PropTypes.func.isRequired,
 }
 
 export default Week

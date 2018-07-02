@@ -3,11 +3,16 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import Event from './Event'
+import TimeSlot from './TimeSlot'
 
 class DayEvents extends React.Component {
 
+	onDragStart(e, eventId) {
+		e.dataTransfer.setData('eventId', eventId)
+	}
+
 	renderEvents() {
-		const events = this.calculateCoordinates()
+        const events = this.calculateCoordinates()
         const origin = moment(this.props.date).hour(this.props.startTime)
         const timeSpan = this.props.endTime - this.props.startTime
 
@@ -36,12 +41,14 @@ class DayEvents extends React.Component {
             	event={event}
             	key={event.id}
             	style={style}
+            	draggable={true}
+            	onDragStart={e => this.onDragStart(e, event.id)}
             />
         })
 	}
 
 	calculateCoordinates() {
-        const events = this.props.events
+		const events = this.props.events.map(event => Object.assign({}, event))
 		const timeSpan = this.props.endTime - this.props.startTime
 		const schedule = []
 
@@ -79,8 +86,12 @@ class DayEvents extends React.Component {
 		const times = []
 		for (let i = this.props.startTime; i < this.props.endTime; i++) {
 			times.push(
-				<div key={i} className="Calendar-Day-Grid-Content-TimeSlot">
-        		</div>
+        		<TimeSlot
+        			key={i}
+        			hour={i}
+        			date={this.props.date}
+        			onDropEvent={this.props.onDropEvent}
+        		/>
 			)
 		}
 		return times
@@ -109,6 +120,7 @@ DayEvents.propTypes = {
     events: PropTypes.array.isRequired,
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
+    onDropEvent: PropTypes.func.isRequired,
 }
 
 export default DayEvents

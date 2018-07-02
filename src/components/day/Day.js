@@ -17,6 +17,7 @@ class Day extends React.Component {
                 events={this.props.events.filter(e => e.start.date() === this.props.date.date())}
                 startTime={this.props.startTime}
                 endTime={this.props.endTime}
+                onDropEvent={this.props.onDropEvent}
             />
         </div>
     }
@@ -27,6 +28,7 @@ Day.propTypes = {
     events: PropTypes.array.isRequired,
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
+    onDropEvent: PropTypes.func.isRequired,
 }
 
 export default Day

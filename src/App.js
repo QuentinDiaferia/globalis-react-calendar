@@ -17,37 +17,37 @@ for (let i = 1; i < 5000; i++) {
 
 const events2 = [
     {
-        id: 4,
-        label: "4",
-        start: moment().startOf('hour').subtract(2, 'hour'),
-        end: moment().startOf('hour').add(1, 'hour'),
-        className: 'Event-green',
-    },
-    {
-        id: 5,
-        label: "5",
-        start: moment().startOf('hour').subtract(2, 'hour'),
-        end: moment().startOf('hour').subtract(1, 'hour'),
-    },
-    {
         id: 1,
         label: "1",
-        start: moment().startOf('hour'),
-        end: moment().startOf('hour').add(1, 'hour'),
+        start: moment().hour(13).startOf('hour'),
+        end: moment().hour(13).startOf('hour').add(1, 'hour'),
         className: 'Event-purple',
     },
     {
         id: 2,
         label: "2",
-        start: moment().startOf('hour'),
-        end: moment().startOf('hour').add(1.5, 'hour'),
+        start: moment().hour(13).startOf('hour'),
+        end: moment().hour(13).startOf('hour').add(1.5, 'hour'),
         className: 'Event-green',
     },
     {
         id: 3,
         label: "3",
-        start: moment().startOf('hour'),
-        end: moment().startOf('hour').add(4, 'hour'),
+        start: moment().hour(15).startOf('hour'),
+        end: moment().hour(15).startOf('hour').add(2, 'hour'),
+    },
+    {
+        id: 4,
+        label: "4",
+        start: moment().hour(11).startOf('hour'),
+        end: moment().hour(11).startOf('hour').add(3, 'hour'),
+        className: 'Event-green',
+    },
+    {
+        id: 5,
+        label: "5",
+        start: moment().hour(11).startOf('hour'),
+        end: moment().hour(11).startOf('hour').add(1, 'hour'),
     },
 ]
 
