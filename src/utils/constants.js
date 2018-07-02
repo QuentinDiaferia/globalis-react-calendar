@@ -3,11 +3,13 @@ import moment from 'moment'
 export const navigation = {
     PREVIOUS: 'prev',
     NEXT: 'next',
+    TODAY: 'today',
 }
 
 export const views = {
     MONTH: 'month',
     WEEK: 'week',
+    DAY: 'day',
 }
 
 const daysIndexes = []

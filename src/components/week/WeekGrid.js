@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import WeekTimeHeader from './WeekTimeHeader'
-import WeekDay from './WeekDay'
+import TimeSlotsHeader from '../common/TimeSlotsHeader'
+import DayEvents from '../common/DayEvents'
 
 class WeekGrid extends React.Component {
     render() {
     	return <div className="Calendar-Week-Grid">
-            <WeekTimeHeader
+            <TimeSlotsHeader
                 startTime={this.props.startTime}
                 endTime={this.props.endTime}
             />
@@ -15,7 +15,7 @@ class WeekGrid extends React.Component {
                 if (!this.props.displayWeekend && [6, 7].indexOf(date.isoWeekday()) !== -1) {
                     return null
                 }
-    			return <WeekDay
+    			return <DayEvents
                     key={date.date()}
                     date={date}
                     events={this.props.events.filter(e => e.start.date() === date.date())}

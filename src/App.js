@@ -21,6 +21,7 @@ const events2 = [
         label: "4",
         start: moment().startOf('hour').subtract(2, 'hour'),
         end: moment().startOf('hour').add(1, 'hour'),
+        className: 'Event-green',
     },
     {
         id: 5,
@@ -33,12 +34,14 @@ const events2 = [
         label: "1",
         start: moment().startOf('hour'),
         end: moment().startOf('hour').add(1, 'hour'),
+        className: 'Event-purple',
     },
     {
         id: 2,
         label: "2",
         start: moment().startOf('hour'),
         end: moment().startOf('hour').add(1.5, 'hour'),
+        className: 'Event-green',
     },
     {
         id: 3,
@@ -70,16 +73,18 @@ for (let i = 1; i < 2000; i++) {
 class App extends React.Component {
     render() {
         return <Calendar
-            view='month'
-            events={events3}
+            view='day'
+            events={events2}
             startTime={8}
             endTime={20}
-            displayWeekend={false}
+            displayWeekend={true}
             language={{
                 label_previous: 'Précédent',
                 label_next: 'Suivant',
+                label_today: 'Aujourd\'hui',
                 label_view_month: 'Mois',
                 label_view_week: 'Semaine',
+                label_view_day: 'Jour',
                 label_more_link: 'autres'
             }}
         />

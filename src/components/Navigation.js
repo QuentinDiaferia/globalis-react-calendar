@@ -13,6 +13,13 @@ class Navigation extends React.Component {
                 {this.props.language.label_previous}
             </button>
             <button
+                onClick={e => this.props.onNavigate(navigation.TODAY)}
+                title={this.props.language.label_today}
+                className="ToolBar-Navigation-Today"
+            >
+                {this.props.language.label_today}
+            </button>
+            <button
                 onClick={e => this.props.onNavigate(navigation.NEXT)}
                 title={this.props.language.label_next}
                 className="ToolBar-Navigation-Next"

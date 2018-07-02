@@ -15,6 +15,8 @@ $calendar-height-header: 25px;
 $calendar-height-timeslot: 40px;
 $calendar-height-day: 100px;
 
+$calendar-width-header-slot: 100px;
+
 .Calendar {
     height: 100%;
     font-size: $calendar-font-size;
@@ -25,6 +27,75 @@ $calendar-height-day: 100px;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
+    }
+
+    &-Day {
+        width: 100%;
+        height: 100%;
+        border: 1px solid $calendar-color-border;
+        border-bottom: 0;
+        display: flex;
+        justify-content: space-between;
+
+        &-TimeHeader {
+            text-align: center;
+            flex: 0 0 $calendar-width-header-slot;
+
+            &-TimeSlot {
+                height: $calendar-height-timeslot;
+                border-bottom:  1px solid $calendar-color-border;
+                padding: 2px;
+
+                &:first-child {
+                    height: $calendar-height-header;
+                }
+            }
+        }
+
+        &-Grid {
+            text-align: center;
+            width: 100%;
+            border-left: 1px solid $calendar-color-border;
+
+            &-Header {
+                height: $calendar-height-header;
+                line-height: $calendar-height-header;
+                vertical-align: middle;
+                text-align: center;
+                font-weight: bold;
+                padding: 2px;
+                border-bottom: 1px solid $calendar-color-border;
+            }
+
+            &-Content {
+                position: relative;
+                overflow: hidden;
+
+                &-TimeSlot {
+                    height: $calendar-height-timeslot;
+                    border-bottom: 1px solid $calendar-color-border;
+                    padding: 2px;
+                }
+
+                .Event {
+                    position: absolute;
+                }
+            }
+
+        }
+    }
+
+    &-Week {
+        width: 100%;
+        height: 100%;
+        border: 1px solid $calendar-color-border;
+        border-bottom: 0;
+
+        &-Grid {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
     }
 
     &-Month {
@@ -83,65 +154,6 @@ $calendar-height-day: 100px;
                             color: $calendar-color-inactive-day-index;
                         }
                     }
-                }
-            }
-        }
-    }
-
-    &-Week {
-        width: 100%;
-        height: 100%;
-        border: 1px solid $calendar-color-border;
-        border-bottom: 0;
-
-        &-Grid {
-            height: 100%;
-            display: flex;
-            justify-content: space-between;
-
-            &-TimeHeader {
-                text-align: center;
-                width: 50%;
-
-                &-Time {
-                    height: $calendar-height-timeslot;
-                    border-bottom:  1px solid $calendar-color-border;
-                    padding: 2px;
-
-                    &:first-child {
-                        height: $calendar-height-header;
-                    }
-                }
-            }
-
-            &-Day {
-                text-align: center;
-                width: 100%;
-                border-left: 1px solid $calendar-color-border;
-
-                &-Header {
-                    height: $calendar-height-header;
-                    line-height: $calendar-height-header;
-                    vertical-align: middle;
-                    text-align: center;
-                    font-weight: bold;
-                    padding: 2px;
-                    border-bottom: 1px solid $calendar-color-border;
-                }
-
-                &-Content {
-                    position: relative;
-                    overflow: hidden;
-                }
-
-                &-TimeSlot {
-                    height: $calendar-height-timeslot;
-                    border-bottom: 1px solid $calendar-color-border;
-                    padding: 2px;
-                }
-
-                .Event {
-                    position: absolute;
                 }
             }
         }
