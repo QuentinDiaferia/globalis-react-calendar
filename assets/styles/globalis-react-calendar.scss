@@ -19,7 +19,6 @@ $calendar-height-day: 100px;
     height: 100%;
     font-size: $calendar-font-size;
     font-family: $calendar-font-family;
-    overflow: hidden;
 
     .ToolBar {
         display: flex;
@@ -132,6 +131,7 @@ $calendar-height-day: 100px;
 
                 &-Content {
                     position: relative;
+                    overflow: hidden;
                 }
 
                 &-TimeSlot {

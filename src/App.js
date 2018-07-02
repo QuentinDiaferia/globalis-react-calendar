@@ -51,21 +51,26 @@ const events2 = [
 const events3 = []
 const start3 = moment('2018-06-25').startOf('day')
 for (let i = 1; i < 2000; i++) {
-    events3.push({
-        id: i,
-        label: i,
-        start: moment(start3),
-        end: moment(start3).add(1, 'h'),
-        className: colors[i % 3],
-    })
-    start3.add(0.25, 'h')
+    if (start3.hour() < 23) {
+        events3.push({
+            id: i,
+            label: i,
+            start: moment(start3),
+            end: moment(start3).add(1, 'h'),
+            className: colors[i % 3],
+        })
+        start3.add(0.25, 'h')
+    } else {
+        start3.add(1, 'd')
+        start3.startOf('day')
+    }
 }
 
 
 class App extends React.Component {
     render() {
         return <Calendar
-            view='week'
+            view='month'
             events={events3}
             startTime={8}
             endTime={20}
