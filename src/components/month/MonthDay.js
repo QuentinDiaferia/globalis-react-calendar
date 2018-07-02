@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Event from '../Event'
+import Event from '../common/Event'
 
 class MonthDay extends React.Component {
     renderEvents(events) {

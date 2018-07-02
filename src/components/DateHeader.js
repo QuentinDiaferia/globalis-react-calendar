@@ -10,6 +10,9 @@ class DateHeader extends React.Component {
             date,
         } = this.props
         switch (view) {
+            case views.DAY:
+                const day = this.props.date.format('ddd DD MMMM')
+                return day.charAt(0).toUpperCase() + day.slice(1)
             case views.WEEK:
                 const start = date.startOf('week').format('DD/MM')
                 const end = date.endOf('week').format('DD/MM')

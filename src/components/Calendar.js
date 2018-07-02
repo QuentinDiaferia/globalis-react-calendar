@@ -6,6 +6,7 @@ import {navigation, views} from '../utils/constants'
 import ToolBar from './ToolBar'
 import Month from './month/Month'
 import Week from './week/Week'
+import Day from './day/Day'
 
 class Calendar extends React.Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class Calendar extends React.Component {
 
     onClickMore(date) {
         this.setState({
-            view: views.WEEK,
+            view: views.DAY,
             date,
         })
     }
@@ -70,8 +71,25 @@ class Calendar extends React.Component {
         />
     }
 
+    renderDay() {
+        const events = this.state.events.filter(event => {
+            return event.start.isSame(this.state.date, 'day')
+            && event.start.hour() >= this.props.startTime
+            && event.end.hour() <= this.props.endTime
+        })
+        return <Day
+            date={this.state.date}
+            events={events}
+            language={this.props.language}
+            startTime={this.props.startTime}
+            endTime={this.props.endTime}
+        />
+    }
+
     renderCalendar() {
         switch (this.state.view) {
+            case views.DAY:
+                return this.renderDay()
             case views.WEEK:
                 return this.renderWeek()
             case views.MONTH:
@@ -95,7 +113,7 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
-    view: PropTypes.oneOf(['month', 'week']).isRequired,
+    view: PropTypes.oneOf(['month', 'week', 'day']).isRequired,
     language: PropTypes.object.isRequired,
     events: PropTypes.array.isRequired,
     startTime: PropTypes.number.isRequired,

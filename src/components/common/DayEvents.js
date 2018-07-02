@@ -2,22 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import WeekTimeSlot from './WeekTimeSlot'
-import Event from '../Event'
+import Event from './Event'
 
-class WeekDay extends React.Component {
-	renderTimeSlots() {
-		const times = []
-		for (let i = this.props.startTime; i < this.props.endTime; i++) {
-			times.push(
-				<WeekTimeSlot
-					key={i}
-					time={i}
-				/>
-			)
-		}
-		return times
-	}
+class DayEvents extends React.Component {
 
 	renderEvents() {
 		const events = this.calculateCoordinates()
@@ -88,17 +75,28 @@ class WeekDay extends React.Component {
         return events
 	}
 
+	renderTimeSlots() {
+		const times = []
+		for (let i = this.props.startTime; i < this.props.endTime; i++) {
+			times.push(
+				<div key={i} className="Calendar-Day-Grid-Content-TimeSlot">
+        		</div>
+			)
+		}
+		return times
+	}
+
 	renderHeader() {
 		const day = this.props.date.format('ddd DD')
-		return <div className="Calendar-Week-Grid-Day-Header">
+		return <div className="Calendar-Day-Grid-Header">
 			{day.charAt(0).toUpperCase() + day.slice(1)}
 		</div>
 	}
 
     render() {
-        return <div className="Calendar-Week-Grid-Day">
+        return <div className="Calendar-Day-Grid">
         	{this.renderHeader()}
-        	<div className="Calendar-Week-Grid-Day-Content">
+        	<div className="Calendar-Day-Grid-Content">
 	        	{this.renderTimeSlots()}
 	        	{this.renderEvents()}
         	</div>
@@ -106,8 +104,8 @@ class WeekDay extends React.Component {
     }
 }
 
-WeekDay.propTypes = {
+DayEvents.propTypes = {
     date: PropTypes.object.isRequired,
 }
 
-export default WeekDay
+export default DayEvents

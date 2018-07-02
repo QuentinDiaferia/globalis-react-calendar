@@ -19,6 +19,13 @@ class ViewSwitcher extends React.Component {
             >
                 {this.props.language.label_view_week}
             </button>
+            <button
+                onClick={e => this.props.changeView(views.DAY)}
+                title={this.props.language.label_view_day}
+                className="ToolBar-ViewSwitcher-Day"
+            >
+                {this.props.language.label_view_day}
+            </button>
         </div>
     }
 }

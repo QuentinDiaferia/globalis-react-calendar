@@ -1,30 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class WeekTimeHeader extends React.Component {
+class TimeSlotsHeader extends React.Component {
 	renderHeader() {
 		const times = []
 		for (let i = this.props.startTime; i < this.props.endTime; i++) {
 			times.push(i)
 		}
 		return times.map(i => {
-			return <div className="Calendar-Week-Grid-TimeHeader-Time" key={i}>
+			return <div className="Calendar-Day-TimeHeader-TimeSlot" key={i}>
 				{i > 9 ? i : "0" + i}:00
 			</div>
 		})
 	}
 
     render() {
-        return <div className="Calendar-Week-Grid-TimeHeader">
-       		<div className="Calendar-Week-Grid-TimeHeader-Time"></div>
+        return <div className="Calendar-Day-TimeHeader">
+       		<div className="Calendar-Day-TimeHeader-TimeSlot"></div>
         	{this.renderHeader()}
         </div>
     }
 }
 
-WeekTimeHeader.propTypes = {
+TimeSlotsHeader.propTypes = {
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
 }
 
-export default WeekTimeHeader
+export default TimeSlotsHeader
