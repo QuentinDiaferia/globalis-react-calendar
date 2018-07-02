@@ -50,6 +50,7 @@ class Calendar extends React.Component {
             events={this.state.events.filter(event => event.start.isSame(this.state.date, 'month'))}
             language={this.props.language}
             onClickMore={this.onClickMore}
+            displayWeekend={this.props.displayWeekend}
         />
     }
 
@@ -65,6 +66,7 @@ class Calendar extends React.Component {
             language={this.props.language}
             startTime={this.props.startTime}
             endTime={this.props.endTime}
+            displayWeekend={this.props.displayWeekend}
         />
     }
 
@@ -98,6 +100,7 @@ Calendar.propTypes = {
     events: PropTypes.array.isRequired,
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
+    displayWeekend: PropTypes.bool.isRequired,
 }
 
 Calendar.defaultProps = {
@@ -106,6 +109,7 @@ Calendar.defaultProps = {
     events: [],
     startTime: 8,
     endTime: 20,
+    displayWeekend: true,
 }
 
 export default Calendar

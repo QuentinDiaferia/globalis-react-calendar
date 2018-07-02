@@ -15,6 +15,9 @@ class MonthWeek extends React.Component {
 
     	return <div className="Calendar-Month-Grid-Week">
     		{days.map(date => {
+                if (!this.props.displayWeekend && [6, 7].indexOf(date.isoWeekday()) !== -1) {
+                    return null
+                }
     			return <MonthDay
     				key={date.date()}
                     date={date}
@@ -34,6 +37,7 @@ MonthWeek.propTypes = {
     events: PropTypes.array.isRequired,
     language: PropTypes.object.isRequired,
     onClickMore: PropTypes.func.isRequired,
+    displayWeekend: PropTypes.bool.isRequired,
 }
 
 export default MonthWeek

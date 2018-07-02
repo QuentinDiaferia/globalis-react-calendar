@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import WeekHeader from './WeekHeader'
 import WeekGrid from './WeekGrid'
 
 class Week extends React.Component {
@@ -20,6 +19,7 @@ class Week extends React.Component {
                 events={this.props.events}
                 startTime={this.props.startTime}
                 endTime={this.props.endTime}
+                displayWeekend={this.props.displayWeekend}
             />
         </div>
     }
@@ -30,6 +30,7 @@ Week.propTypes = {
     events: PropTypes.array.isRequired,
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
+    displayWeekend: PropTypes.bool.isRequired,
 }
 
 export default Week

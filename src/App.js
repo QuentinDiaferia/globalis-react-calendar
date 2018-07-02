@@ -65,10 +65,11 @@ for (let i = 1; i < 2000; i++) {
 class App extends React.Component {
     render() {
         return <Calendar
-            view='month'
+            view='week'
             events={events3}
             startTime={8}
             endTime={20}
+            displayWeekend={false}
             language={{
                 label_previous: 'Précédent',
                 label_next: 'Suivant',
