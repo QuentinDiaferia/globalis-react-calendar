@@ -20,7 +20,7 @@ class ToolBar extends React.Component {
         const NavigationComponent = this.props.components.navigation || Navigation
         const ViewSwitcherComponent = this.props.components.viewSwitcher || ViewSwitcher
         const SettingsComponent = this.props.components.settings || Settings
-        return <div className="ToolBar">
+        return <div className="Calendar-ToolBar">
             <NavigationComponent
                 onNavigate={onNavigate}
                 language={language}
@@ -29,7 +29,7 @@ class ToolBar extends React.Component {
                 view={view}
                 date={date}
             />
-            <div className="ToolBar-SubGroup">
+            <div className="Calendar-ToolBar-SubGroup">
                 <ViewSwitcherComponent
                     changeView={changeView}
                     language={language}

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 class Settings extends React.Component {
     render() {
-        return <div className="ToolBar-Settings">
+        return <div className="Calendar-ToolBar-Settings">
             <button
                 onClick={this.props.toggleSettingsForm}
                 title={this.props.language.label_settings}
-                className="ToolBar-Settings"
+                className="Calendar-ToolBar-Settings"
             >
                 {this.props.language.label_settings}
             </button>

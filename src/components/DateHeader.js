@@ -25,7 +25,7 @@ class DateHeader extends React.Component {
     }
 
     render() {
-        return <div className="ToolBar-DateHeader">
+        return <div className="Calendar-ToolBar-DateHeader">
             {this.renderDate()}
         </div>
     }

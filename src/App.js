@@ -4,6 +4,7 @@ import Calendar from './components/Calendar'
 import ToolBar from './components/ToolBar'
 import Navigation from './components/Navigation'
 import ViewSwitcher from './components/ViewSwitcher'
+import SettingsForm from './components/SettingsForm'
 
 const colors = [null, 'Event-green', 'Event-purple']
 const start = moment('2018-05-01').startOf('month')
@@ -95,6 +96,7 @@ class App extends React.Component {
                 toolbar: ToolBar,
                 navigation: Navigation,
                 viewSwitcher: ViewSwitcher,
+                settingsForm: SettingsForm,
             }}
         />
     }

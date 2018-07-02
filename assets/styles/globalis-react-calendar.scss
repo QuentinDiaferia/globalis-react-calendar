@@ -23,7 +23,7 @@ $calendar-width-header-slot: 100px;
     font-size: $calendar-font-size;
     font-family: $calendar-font-family;
 
-    .ToolBar {
+    &-ToolBar {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -32,6 +32,10 @@ $calendar-width-header-slot: 100px;
         &-SubGroup {
             display: flex;
         }
+    }
+
+    &-SettingsForm {
+        margin-bottom: 15px;
     }
 
     &-Day {
