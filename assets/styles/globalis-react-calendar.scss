@@ -1,6 +1,7 @@
 $calendar-color-border: #ddd;
 $calendar-color-inactive-day: #e5e5e5;;
 $calendar-color-inactive-day-index: #999999;
+$calendar-color-active-time-slot: #999999;
 $calendar-color-event: #3174ad;
 $calendar-color-event-green: #33b679;
 $calendar-color-event-purple: #3f51b5;
@@ -70,15 +71,28 @@ $calendar-width-header-slot: 100px;
             &-Content {
                 position: relative;
                 overflow: hidden;
+                z-index: 1;
 
                 &-TimeSlot {
                     height: $calendar-height-timeslot;
                     border-bottom: 1px solid $calendar-color-border;
                     padding: 2px;
+
+                    &.drag {
+                        background-color: $calendar-color-active-time-slot;
+                        position: relative;
+                        opacity: 0.4;
+                        z-index: 1;
+                    }
                 }
 
                 .Event {
                     position: absolute;
+
+                    &.drag {
+                        opacity: 0.6;
+                        z-index: -1;
+                    }
                 }
             }
 
@@ -167,7 +181,6 @@ $calendar-width-header-slot: 100px;
         border-radius: 5px;
         margin-bottom: 1px;
         text-align: left;
-        z-index: 2;
 
         &[draggable=true] {
             cursor: pointer;
