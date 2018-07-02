@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 class WeekTimeHeader extends React.Component {
 	renderHeader() {
 		const times = []
-		for (let i = 0; i < 24; i++) {
+		for (let i = this.props.startTime; i < this.props.endTime; i++) {
 			times.push(i)
 		}
 		return times.map(i => {
@@ -16,9 +16,15 @@ class WeekTimeHeader extends React.Component {
 
     render() {
         return <div className="Calendar-Week-Grid-TimeHeader">
+       		<div className="Calendar-Week-Grid-TimeHeader-Time"></div>
         	{this.renderHeader()}
         </div>
     }
+}
+
+WeekTimeHeader.propTypes = {
+    startTime: PropTypes.number.isRequired,
+    endTime: PropTypes.number.isRequired,
 }
 
 export default WeekTimeHeader

@@ -12,11 +12,13 @@ class Calendar extends React.Component {
         super(props)
         this.state = {
             view: props.view,
-            date: props.date,
+            date: moment(props.date),
+            events: props.events.sort((e1, e2) => e1.start.diff(e2.start)),
         }
         this.renderCalendar = this.renderCalendar.bind(this)
         this.changeView = this.changeView.bind(this)
         this.onNavigate = this.onNavigate.bind(this)
+        this.onClickMore = this.onClickMore.bind(this)
     }
 
     changeView(view) {
@@ -35,15 +37,36 @@ class Calendar extends React.Component {
         }
     }
 
+    onClickMore(date) {
+        this.setState({
+            view: views.WEEK,
+            date,
+        })
+    }
+
     renderMonth() {
         return <Month
             date={this.state.date}
+            events={this.state.events.filter(event => event.start.isSame(this.state.date, 'month'))}
+            language={this.props.language}
+            onClickMore={this.onClickMore}
+            displayWeekend={this.props.displayWeekend}
         />
     }
 
     renderWeek() {
+        const events = this.state.events.filter(event => {
+            return event.start.isSame(this.state.date, 'week')
+            && event.start.hour() >= this.props.startTime
+            && event.end.hour() <= this.props.endTime
+        })
         return <Week
             date={this.state.date}
+            events={events}
+            language={this.props.language}
+            startTime={this.props.startTime}
+            endTime={this.props.endTime}
+            displayWeekend={this.props.displayWeekend}
         />
     }
 
@@ -64,6 +87,7 @@ class Calendar extends React.Component {
                 view={this.state.view}
                 onNavigate={this.onNavigate}
                 changeView={this.changeView}
+                language={this.props.language}
             />
             {this.renderCalendar()}
         </div>
@@ -72,11 +96,20 @@ class Calendar extends React.Component {
 
 Calendar.propTypes = {
     view: PropTypes.oneOf(['month', 'week']).isRequired,
+    language: PropTypes.object.isRequired,
+    events: PropTypes.array.isRequired,
+    startTime: PropTypes.number.isRequired,
+    endTime: PropTypes.number.isRequired,
+    displayWeekend: PropTypes.bool.isRequired,
 }
 
 Calendar.defaultProps = {
     view: 'month',
     date: moment(),
+    events: [],
+    startTime: 8,
+    endTime: 20,
+    displayWeekend: true,
 }
 
 export default Calendar

@@ -6,20 +6,25 @@ import MonthDay from './MonthDay'
 
 class MonthWeek extends React.Component {
     render() {
-		const start = moment(this.props.date).startOf('week'),
-			end = moment(this.props.date).endOf('week'),
+		const end = moment(this.props.date).endOf('isoWeek').add(1, 'd').date(),
         	days = []
 
-        for (const date = moment(start); date.isBefore(end); date.add(1, 'd')) {
+        for (const date = moment(this.props.date); date.date() !== end; date.add(1, 'd')) {
             days.push(moment(date))
         }
 
     	return <div className="Calendar-Month-Grid-Week">
-    		{days.map((date, index) => {
+    		{days.map(date => {
+                if (!this.props.displayWeekend && [6, 7].indexOf(date.isoWeekday()) !== -1) {
+                    return null
+                }
     			return <MonthDay
-    				key={index}
-    				date={date}
+    				key={date.date()}
+                    date={date}
     				outOfMonth={date.month() !== this.props.selectedMonth}
+                    events={this.props.events.filter(e => e.start.date() === date.date())}
+                    language={this.props.language}
+                    onClickMore={this.props.onClickMore}
     			/>
     		})}
     	</div>
@@ -29,6 +34,10 @@ class MonthWeek extends React.Component {
 MonthWeek.propTypes = {
     date: PropTypes.object.isRequired,
     selectedMonth: PropTypes.number.isRequired,
+    events: PropTypes.array.isRequired,
+    language: PropTypes.object.isRequired,
+    onClickMore: PropTypes.func.isRequired,
+    displayWeekend: PropTypes.bool.isRequired,
 }
 
 export default MonthWeek

@@ -44,7 +44,8 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('[name].css')
+        new ExtractTextPlugin('[name].css'),
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /fr/),
     ],
     watchOptions: {
         ignored: /node_modules/,

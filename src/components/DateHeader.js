@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import {views} from '../utils/constants'
 
 class DateHeader extends React.Component {
@@ -15,7 +16,8 @@ class DateHeader extends React.Component {
                 return `${start} - ${end}`
             case views.MONTH:
             default:
-                return date.format('MM/YYYY')
+                const month = date.format('MMMM YYYY')
+                return month.charAt(0).toUpperCase() + month.slice(1)
         }
     }
 
@@ -27,6 +29,7 @@ class DateHeader extends React.Component {
 }
 
 DateHeader.propTypes = {
+    view: PropTypes.string,
     date: PropTypes.object.isRequired,
 }
 

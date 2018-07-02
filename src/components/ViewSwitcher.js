@@ -5,17 +5,26 @@ import {views} from '../utils/constants'
 class ViewSwitcher extends React.Component {
     render() {
         return <div className="ToolBar-ViewSwitcher">
-            <button onClick={e => this.props.changeView(views.MONTH)}>
-                Month
+            <button
+                onClick={e => this.props.changeView(views.MONTH)}
+                title={this.props.language.label_view_month}
+                className="ToolBar-ViewSwitcher-Month"
+            >
+                {this.props.language.label_view_month}
             </button>
-            <button onClick={e => this.props.changeView(views.WEEK)}>
-                Week
+            <button
+                onClick={e => this.props.changeView(views.WEEK)}
+                title={this.props.language.label_view_week}
+                className="ToolBar-ViewSwitcher-Week"
+            >
+                {this.props.language.label_view_week}
             </button>
         </div>
     }
 }
 
 ViewSwitcher.propTypes = {
+    language: PropTypes.object.isRequired,
     changeView: PropTypes.func.isRequired,
 }
 

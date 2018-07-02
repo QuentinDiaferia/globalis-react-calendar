@@ -1,14 +1,29 @@
 $calendar-color-border: #ddd;
 $calendar-color-inactive-day: #e5e5e5;;
 $calendar-color-inactive-day-index: #999999;
+$calendar-color-event: #3174ad;
+$calendar-color-event-green: #33b679;
+$calendar-color-event-purple: #3f51b5;
+$calendar-color-more: #3174ad;
+
+$calendar-font-size: 14px;
+$calendar-font-family: Arial;
+
+$calendar-padding-event: 4px;
+
+$calendar-height-header: 25px;
+$calendar-height-timeslot: 40px;
+$calendar-height-day: 100px;
 
 .Calendar {
-    min-height: 580px;
     height: 100%;
+    font-size: $calendar-font-size;
+    font-family: $calendar-font-family;
 
     .ToolBar {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin-bottom: 15px;
     }
 
@@ -25,6 +40,9 @@ $calendar-color-inactive-day-index: #999999;
 
             &-Cell {
                 width: 100%;
+                height: $calendar-height-header;
+                line-height: $calendar-height-header;
+                vertical-align: middle;
                 text-align: center;
                 font-weight: bold;
                 padding: 2px;
@@ -41,14 +59,13 @@ $calendar-color-inactive-day-index: #999999;
             &-Week {
                 display: flex;
                 justify-content: space-between;
-                height: 100%;
+                height: $calendar-height-day;
                 max-height: 15%;
                 border-bottom: 1px solid $calendar-color-border;
 
                 &-Day {
                     width: 100%;
                     text-align: center;
-                    padding: 2px;
 
                     & + & {
                         border-left: 1px solid $calendar-color-border;
@@ -56,6 +73,7 @@ $calendar-color-inactive-day-index: #999999;
 
                     .day-index {
                         text-align: right;
+                        padding: 2px;
                     }
 
                     &.Day-inactive {
@@ -76,53 +94,87 @@ $calendar-color-inactive-day-index: #999999;
         border: 1px solid $calendar-color-border;
         border-bottom: 0;
 
-        &-Header {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid $calendar-color-border;
-
-            &-Cell {
-                width: 100%;
-                text-align: center;
-                font-weight: bold;
-                padding: 2px;
-
-                & + & {
-                    border-left: 1px solid $calendar-color-border;
-                }
-            }
-        }
-
         &-Grid {
             height: 100%;
             display: flex;
             justify-content: space-between;
 
             &-TimeHeader {
-                width: 12.5%;
-                border-right: 1px solid $calendar-color-border;
                 text-align: center;
+                width: 50%;
 
                 &-Time {
-                    height: 40px;
+                    height: $calendar-height-timeslot;
                     border-bottom:  1px solid $calendar-color-border;
                     padding: 2px;
+
+                    &:first-child {
+                        height: $calendar-height-header;
+                    }
                 }
             }
 
             &-Day {
-                width: 12.5%;
                 text-align: center;
-                & + & {
-                    border-left: 1px solid $calendar-color-border;
+                width: 100%;
+                border-left: 1px solid $calendar-color-border;
+
+                &-Header {
+                    height: $calendar-height-header;
+                    line-height: $calendar-height-header;
+                    vertical-align: middle;
+                    text-align: center;
+                    font-weight: bold;
+                    padding: 2px;
+                    border-bottom: 1px solid $calendar-color-border;
+                }
+
+                &-Content {
+                    position: relative;
+                    overflow: hidden;
                 }
 
                 &-TimeSlot {
-                    height: 40px;
-                    border-bottom:  1px solid $calendar-color-border;
+                    height: $calendar-height-timeslot;
+                    border-bottom: 1px solid $calendar-color-border;
                     padding: 2px;
                 }
+
+                .Event {
+                    position: absolute;
+                }
             }
+        }
+    }
+
+    .Event {
+        max-width: 100%;
+        max-height: 100%;
+        color: #fff;
+        background-color: $calendar-color-event;
+        border-radius: 5px;
+        margin-bottom: 1px;
+        text-align: left;
+        z-index: 2;
+
+        &-inner {
+            padding: $calendar-padding-event;
+        }
+
+        &-More {
+            display: block;
+            color: $calendar-color-event;
+            padding: $calendar-padding-event;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        &-green {
+            background-color: $calendar-color-event-green;
+        }
+
+        &-purple {
+            background-color: $calendar-color-event-purple;
         }
     }
 }

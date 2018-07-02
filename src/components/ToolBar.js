@@ -7,16 +7,25 @@ import ViewSwitcher from './ViewSwitcher'
 
 class ToolBar extends React.Component {
     render() {
+        const {
+            view,
+            date,
+            onNavigate,
+            changeView,
+            language,
+        } = this.props
         return <div className="ToolBar">
             <Navigation
-                onNavigate={this.props.onNavigate}
+                onNavigate={onNavigate}
+                language={language}
             />
             <DateHeader
-                view={this.props.view}
-                date={this.props.date}
+                view={view}
+                date={date}
             />
             <ViewSwitcher
-                changeView={this.props.changeView}
+                changeView={changeView}
+                language={language}
             />
         </div>
     }
@@ -25,6 +34,7 @@ class ToolBar extends React.Component {
 ToolBar.propTypes = {
     view: PropTypes.string.isRequired,
     date: PropTypes.object.isRequired,
+    language: PropTypes.object.isRequired,
     onNavigate: PropTypes.func.isRequired,
     changeView: PropTypes.func.isRequired,
 }

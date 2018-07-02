@@ -3,6 +3,10 @@
 # dependencies
 /node_modules
 
+# public
+/public/bundle.js
+/public/main.css
+
 # testing
 /coverage
 
