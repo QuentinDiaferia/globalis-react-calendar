@@ -7,13 +7,6 @@ import DayEvents from '../common/DayEvents'
 
 class Day extends React.Component {
     render() {
-		const end = moment(this.props.date).endOf('week').add(1, 'd').date(),
-        	days = []
-
-        for (const date = moment(this.props.date).startOf('week'); date.date() !== end; date.add(1, 'd')) {
-            days.push(moment(date))
-        }
-
         return <div className="Calendar-Day">
             <TimeSlotsHeader
                 startTime={this.props.startTime}

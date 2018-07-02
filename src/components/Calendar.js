@@ -13,7 +13,7 @@ class Calendar extends React.Component {
         super(props)
         this.state = {
             view: props.view,
-            date: moment(props.date),
+            date: moment(props.date).startOf('day'),
             events: props.events.sort((e1, e2) => e1.start.diff(e2.start)),
         }
         this.renderCalendar = this.renderCalendar.bind(this)
@@ -27,18 +27,20 @@ class Calendar extends React.Component {
     }
 
     onNavigate(direction) {
+        let date
         switch (direction) {
             case navigation.PREVIOUS:
-                this.setState({date: this.state.date.subtract(1, this.state.view)})
+                date = this.state.date.subtract(1, this.state.view).startOf('day')
                 break
             case navigation.NEXT:
-                this.setState({date: this.state.date.add(1, this.state.view)})
+                date = this.state.date.add(1, this.state.view).startOf('day')
                 break
             case navigation.TODAY:
             default:
-                this.setState({date: moment()})
+                date = moment().startOf('day')
                 break
         }
+        this.setState({date})
     }
 
     onClickMore(date) {

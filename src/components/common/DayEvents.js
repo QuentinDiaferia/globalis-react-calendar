@@ -106,6 +106,9 @@ class DayEvents extends React.Component {
 
 DayEvents.propTypes = {
     date: PropTypes.object.isRequired,
+    events: PropTypes.array.isRequired,
+    startTime: PropTypes.number.isRequired,
+    endTime: PropTypes.number.isRequired,
 }
 
 export default DayEvents
