@@ -20,6 +20,7 @@ class Calendar extends React.Component {
         this.changeView = this.changeView.bind(this)
         this.onNavigate = this.onNavigate.bind(this)
         this.onClickMore = this.onClickMore.bind(this)
+        this.onDropEvent = this.onDropEvent.bind(this)
     }
 
     changeView(view) {
@@ -50,6 +51,24 @@ class Calendar extends React.Component {
         })
     }
 
+    onDropEvent(eventId, date, hour) {
+        const events = this.state.events.map(event => {
+            if (event.id == eventId) {
+                const diff = moment.duration(
+                    event.end.diff(event.start)
+                ).as('minutes')
+                const start = moment(date).hour(hour)
+                const end = moment(date).hour(hour).add(diff, 'minutes')
+                return Object.assign({}, event, {
+                    start,
+                    end,
+                })
+            }
+            return event
+        })
+        this.setState({events})
+    }
+
     renderMonth() {
         return <Month
             date={this.state.date}
@@ -73,6 +92,7 @@ class Calendar extends React.Component {
             startTime={this.props.startTime}
             endTime={this.props.endTime}
             displayWeekend={this.props.displayWeekend}
+            onDropEvent={this.onDropEvent}
         />
     }
 
@@ -88,6 +108,7 @@ class Calendar extends React.Component {
             language={this.props.language}
             startTime={this.props.startTime}
             endTime={this.props.endTime}
+            onDropEvent={this.onDropEvent}
         />
     }
 

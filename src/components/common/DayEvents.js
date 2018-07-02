@@ -3,15 +3,65 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import Event from './Event'
+import TimeSlot from './TimeSlot'
 
 class DayEvents extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			events: [],
+		}
+		this.renderEvents = this.renderEvents.bind(this)
+		this.renderTimeSlots = this.renderTimeSlots.bind(this)
+		this.renderHeader = this.renderHeader.bind(this)
+	}
+
+	static getDerivedStateFromProps(props, state) {
+		const events = props.events.map(event => Object.assign({}, event))
+		const timeSpan = props.endTime - props.startTime
+		const schedule = []
+
+		for (let i = 0; i < timeSpan * 60; i++) {
+			schedule.push([])
+		}
+
+		const origin = moment(props.date).hour(props.startTime)
+		events.forEach((event, index) => {
+			for (let minute = event.start.diff(origin, 'minutes'); minute < event.end.diff(origin, 'minutes'); minute++) {
+				schedule[minute] && schedule[minute].push(index)
+			}
+		})
+
+		schedule.forEach(minute => {
+			let next_hindex = 0
+			const nEvents = minute.length
+			if (nEvents > 0) {
+				minute.forEach(eventIndex => {
+					if (!events[eventIndex].maxOverlap || events[eventIndex].maxOverlap <= nEvents) {
+						events[eventIndex].maxOverlap = nEvents
+						if (!events[eventIndex].hindex || events[eventIndex].hindex <= next_hindex) {
+							events[eventIndex].hindex = next_hindex
+							next_hindex++
+						}
+					}
+				})
+			}
+		})
+
+		return {
+			events,
+		}
+	}
+
+	onDragStart(e, eventId) {
+		e.dataTransfer.setData('eventId', eventId)
+	}
 
 	renderEvents() {
-		const events = this.calculateCoordinates()
         const origin = moment(this.props.date).hour(this.props.startTime)
         const timeSpan = this.props.endTime - this.props.startTime
 
-        return events.map(event => {
+        return this.state.events.map(event => {
             const duration = moment.duration(
                 event.end.diff(event.start)
             ).as('hours')
@@ -36,12 +86,14 @@ class DayEvents extends React.Component {
             	event={event}
             	key={event.id}
             	style={style}
+            	draggable={true}
+            	onDragStart={e => this.onDragStart(e, event.id)}
             />
         })
 	}
 
-	calculateCoordinates() {
-        const events = this.props.events
+	/*calculateCoordinates() {
+        const events = this.state.events
 		const timeSpan = this.props.endTime - this.props.startTime
 		const schedule = []
 
@@ -73,14 +125,18 @@ class DayEvents extends React.Component {
 		})
 
         return events
-	}
+	}*/
 
 	renderTimeSlots() {
 		const times = []
 		for (let i = this.props.startTime; i < this.props.endTime; i++) {
 			times.push(
-				<div key={i} className="Calendar-Day-Grid-Content-TimeSlot">
-        		</div>
+        		<TimeSlot
+        			key={i}
+        			hour={i}
+        			date={this.props.date}
+        			onDropEvent={this.props.onDropEvent}
+        		/>
 			)
 		}
 		return times
@@ -109,6 +165,7 @@ DayEvents.propTypes = {
     events: PropTypes.array.isRequired,
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
+    onDropEvent: PropTypes.func.isRequired,
 }
 
 export default DayEvents

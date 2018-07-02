@@ -169,6 +169,10 @@ $calendar-width-header-slot: 100px;
         text-align: left;
         z-index: 2;
 
+        &[draggable=true] {
+            cursor: pointer;
+        }
+
         &-inner {
             padding: $calendar-padding-event;
         }

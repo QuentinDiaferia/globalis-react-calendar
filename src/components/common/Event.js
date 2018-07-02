@@ -6,12 +6,16 @@ class Event extends React.Component {
         const {
             event,
             style,
+            draggable,
+            onDragStart,
         } = this.props
         const className = 'Event' + (event.className ? ` ${event.className}` : '')
         return <div
                 style={style}
                 className={className}
                 key={event.id}
+                draggable={draggable}
+                onDragStart={onDragStart || null}
             >
                 <div className='Event-inner'>
                     {event.label}
@@ -23,10 +27,13 @@ class Event extends React.Component {
 Event.propTypes = {
     event: PropTypes.object.isRequired,
     style: PropTypes.object.isRequired,
+    draggable: PropTypes.bool.isRequired,
+    onDragStart: PropTypes.func,
 }
 
 Event.defaultProps = {
     style: {},
+    draggable: false,
 }
 
 export default Event
