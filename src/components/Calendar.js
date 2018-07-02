@@ -32,8 +32,11 @@ class Calendar extends React.Component {
                 this.setState({date: this.state.date.subtract(1, this.state.view)})
                 break
             case navigation.NEXT:
-            default:
                 this.setState({date: this.state.date.add(1, this.state.view)})
+                break
+            case navigation.TODAY:
+            default:
+                this.setState({date: moment()})
                 break
         }
     }

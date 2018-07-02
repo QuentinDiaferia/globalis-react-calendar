@@ -3,6 +3,7 @@ import moment from 'moment'
 export const navigation = {
     PREVIOUS: 'prev',
     NEXT: 'next',
+    TODAY: 'today',
 }
 
 export const views = {

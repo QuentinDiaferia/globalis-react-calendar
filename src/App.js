@@ -81,6 +81,7 @@ class App extends React.Component {
             language={{
                 label_previous: 'Précédent',
                 label_next: 'Suivant',
+                label_today: 'Aujourd\'hui',
                 label_view_month: 'Mois',
                 label_view_week: 'Semaine',
                 label_view_day: 'Jour',
