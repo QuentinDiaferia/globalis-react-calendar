@@ -31,9 +31,13 @@ class Calendar extends React.Component {
     }
 
     changeView(view) {
+        let date = moment(this.state.date)
+        if (this.state.view !== views.DAY) {
+            date.startOf('week')
+        }
         this.setState({
-            date: this.state.date.startOf('week'),
-            view
+            date,
+            view,
         })
     }
 
@@ -56,10 +60,10 @@ class Calendar extends React.Component {
         let date
         switch (direction) {
             case navigation.PREVIOUS:
-                date = this.state.date.subtract(1, this.state.view).startOf('day')
+                date = moment(this.state.date).subtract(1, this.state.view).startOf('day')
                 break
             case navigation.NEXT:
-                date = this.state.date.add(1, this.state.view).startOf('day')
+                date = moment(this.state.date).add(1, this.state.view).startOf('day')
                 break
             case navigation.TODAY:
             default:
