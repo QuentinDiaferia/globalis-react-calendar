@@ -20,17 +20,17 @@ class WeekGrid extends React.Component {
     }
 
     render() {
-    	return <div className="Calendar-Week-Grid">
+        return <div className="Calendar-Week-Grid">
             <TimeSlotsHeader
                 startTime={this.props.startTime}
                 endTime={this.props.endTime}
             />
-    		{this.props.days.map(date => {
+            {this.props.days.map(date => {
                 if (!this.props.displayWeekend && [6, 7].indexOf(date.isoWeekday()) !== -1) {
                     return null
                 }
-    			return <DayEvents
-                    key={date.date()}
+                return <DayEvents
+                    key={date.format('YYYY-MM-DD')}
                     date={date}
                     events={this.props.events.filter(e => e.start.date() === date.date())}
                     startTime={this.props.startTime}
@@ -41,8 +41,8 @@ class WeekGrid extends React.Component {
                     toggleTooltip={this.toggleTooltip}
                     displayTooltip={this.state.displayTooltip}
                 />
-    		})}
-    	</div>
+            })}
+        </div>
     }
 }
 

@@ -31,7 +31,7 @@ class Month extends React.Component {
 
         return weeks.map(date => {
             return <MonthWeek
-                key={date.week()}
+                key={date.format('YYYY-w')}
                 date={date}
                 selectedMonth={selectedMonth}
                 events={this.props.events.filter(event => event.start.week() === date.week())}

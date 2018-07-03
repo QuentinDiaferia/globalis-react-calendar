@@ -6,8 +6,8 @@ import WeekGrid from './WeekGrid'
 
 class Week extends React.Component {
     render() {
-		const end = moment(this.props.date).endOf('week').add(1, 'd').date(),
-        	days = []
+        const end = moment(this.props.date).endOf('week').add(1, 'd').date(),
+            days = []
 
         for (const date = moment(this.props.date).startOf('week'); date.date() !== end; date.add(1, 'd')) {
             days.push(moment(date))
@@ -15,6 +15,7 @@ class Week extends React.Component {
 
         return <div className="Calendar-Week">
             <WeekGrid
+                key={this.props.date.format('YYYY-w')}
                 days={days}
                 events={this.props.events}
                 startTime={this.props.startTime}

@@ -134,6 +134,7 @@ class Calendar extends React.Component {
             && event.end.hour() <= this.state.endTime
         })
         return <Day
+            key={this.state.date.format('YYYY-MM-DD')}
             date={this.state.date}
             events={events}
             startTime={this.state.startTime}

@@ -11,6 +11,7 @@ class Month extends React.Component {
                 displayWeekend={this.props.displayWeekend}
             />
             <MonthGrid
+                key={this.props.date.format('YYYY-MM')}
                 date={this.props.date}
                 events={this.props.events}
                 language={this.props.language}
