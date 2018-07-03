@@ -35,9 +35,15 @@ class Event extends React.Component {
             style,
             draggable,
             onDragStart,
+            components,
+            displayTooltip,
+            closeTooltip,
+            toggleTooltip,
         } = this.props
 
-        let className = 'Event'
+        const TooltipComponent = components.tooltip || null
+
+        let className = 'Calendar-Event'
         if (event.className) {
             className += ` ${event.className}`
         }
@@ -45,7 +51,8 @@ class Event extends React.Component {
             className += ` ${this.state.className}`
         }
 
-        return <div
+        return <React.Fragment>
+            <div
                 style={style}
                 className={className}
                 key={event.id}
@@ -54,11 +61,20 @@ class Event extends React.Component {
                 onDragOver={this.onDragOver}
                 onDragEnter={this.onDragEnter}
                 onDragLeave={this.onDragLeave}
+                onClick={() => toggleTooltip(event.id)}
             >
-                <div className='Event-inner'>
+                <div className='Calendar-Event-inner'>
                     {event.label}
                 </div>
-        </div>
+            </div>
+            {displayTooltip && TooltipComponent &&
+                <TooltipComponent
+                    event={event}
+                    topPosition={style.top}
+                    closeTooltip={closeTooltip}
+                />
+            }
+        </React.Fragment>
     }
 }
 
@@ -67,11 +83,16 @@ Event.propTypes = {
     style: PropTypes.object.isRequired,
     draggable: PropTypes.bool.isRequired,
     onDragStart: PropTypes.func,
+    components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    closeTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.bool,
 }
 
 Event.defaultProps = {
     style: {},
     draggable: false,
+    displayTooltip: false,
 }
 
 export default Event

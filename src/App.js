@@ -6,7 +6,7 @@ import Navigation from './components/Navigation'
 import ViewSwitcher from './components/ViewSwitcher'
 import SettingsForm from './components/SettingsForm'
 
-const colors = [null, 'Event-green', 'Event-purple']
+const colors = [null, 'Calendar-Event-green', 'Calendar-Event-purple']
 const start = moment('2018-05-01').startOf('month')
 const events = []
 for (let i = 1; i < 5000; i++) {
@@ -25,14 +25,14 @@ const events2 = [
         label: "1",
         start: moment().hour(13).startOf('hour'),
         end: moment().hour(13).startOf('hour').add(1, 'hour'),
-        className: 'Event-purple',
+        className: 'Calendar-Event-purple',
     },
     {
         id: 2,
         label: "2",
         start: moment().hour(13).startOf('hour'),
         end: moment().hour(13).startOf('hour').add(1.5, 'hour'),
-        className: 'Event-green',
+        className: 'Calendar-Event-green',
     },
     {
         id: 3,
@@ -45,13 +45,25 @@ const events2 = [
         label: "4",
         start: moment().hour(11).startOf('hour'),
         end: moment().hour(11).startOf('hour').add(3, 'hour'),
-        className: 'Event-green',
+        className: 'Calendar-Event-green',
     },
     {
         id: 5,
         label: "5",
         start: moment().hour(11).startOf('hour'),
         end: moment().hour(11).startOf('hour').add(1, 'hour'),
+    },
+    {
+        id: 6,
+        label: "6",
+        start: moment('2018-07-31').hour(11).startOf('hour'),
+        end: moment('2018-07-31').hour(11).startOf('hour').add(1, 'hour'),
+    },
+    {
+        id: 7,
+        label: "7",
+        start: moment('2018-08-05').hour(11).startOf('hour'),
+        end: moment('2018-08-05').hour(11).startOf('hour').add(1, 'hour'),
     },
 ]
 

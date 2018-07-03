@@ -35,10 +35,6 @@ $calendar-width-header-slot: 100px;
         }
     }
 
-    &-SettingsForm {
-        margin-bottom: 15px;
-    }
-
     &-Day {
         width: 100%;
         height: 100%;
@@ -88,7 +84,6 @@ $calendar-width-header-slot: 100px;
 
             &-Content {
                 position: relative;
-                overflow: hidden;
 
                 &-TimeSlot {
                     height: $calendar-height-timeslot;
@@ -103,7 +98,7 @@ $calendar-width-header-slot: 100px;
                     }
                 }
 
-                .Event {
+                .Calendar-Event {
                     position: absolute;
 
                     &.drag {
@@ -167,6 +162,7 @@ $calendar-width-header-slot: 100px;
                 &-Day {
                     width: 100%;
                     text-align: center;
+                    position: relative;
 
                     & + & {
                         border-left: 1px solid $calendar-color-border;
@@ -177,6 +173,10 @@ $calendar-width-header-slot: 100px;
                         justify-content: space-between;
                         padding: 4px;
 
+                        &-Index {
+                            cursor: pointer;
+                        }
+
                         &-Holiday {
                             color: $calendar-color-holiday;
                         }
@@ -185,7 +185,7 @@ $calendar-width-header-slot: 100px;
                     &.Day-inactive {
                         background-color: $calendar-color-inactive-day;
 
-                        .day-index {
+                        .Day-Header-Index {
                             color: $calendar-color-inactive-day-index;
                         }
                     }
@@ -194,7 +194,7 @@ $calendar-width-header-slot: 100px;
         }
     }
 
-    .Event {
+    &-Event {
         max-width: 100%;
         max-height: 100%;
         color: #fff;
@@ -202,10 +202,7 @@ $calendar-width-header-slot: 100px;
         border-radius: 5px;
         margin-bottom: 1px;
         text-align: left;
-
-        &[draggable=true] {
-            cursor: pointer;
-        }
+        cursor: pointer;
 
         &-inner {
             padding: $calendar-padding-event;
@@ -226,5 +223,6 @@ $calendar-width-header-slot: 100px;
         &-purple {
             background-color: $calendar-color-event-purple;
         }
+
     }
 }

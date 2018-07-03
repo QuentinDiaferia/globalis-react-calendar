@@ -17,13 +17,18 @@ class Month extends React.Component {
 
         return weeks.map(date => {
             return <MonthWeek
-                key={date.week()}
+                key={date.format('YYYY-w')}
                 date={date}
                 selectedMonth={selectedMonth}
                 events={this.props.events.filter(event => event.start.week() === date.week())}
                 language={this.props.language}
                 onClickMore={this.props.onClickMore}
+                goToDay={this.props.goToDay}
                 displayWeekend={this.props.displayWeekend}
+                components={this.props.components}
+                toggleTooltip={this.props.toggleTooltip}
+                closeTooltip={this.props.closeTooltip}
+                displayTooltip={this.props.displayTooltip}
             />
         })
     }
@@ -40,7 +45,12 @@ Month.propTypes = {
     events: PropTypes.array.isRequired,
     language: PropTypes.object.isRequired,
     onClickMore: PropTypes.func.isRequired,
+    goToDay: PropTypes.func.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
+    components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    closeTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.number,
 }
 
 export default Month
