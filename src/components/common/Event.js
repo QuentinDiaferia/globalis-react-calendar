@@ -52,26 +52,29 @@ class Event extends React.Component {
             className += ` ${this.state.className}`
         }
 
-        return <div
-            style={style}
-            className={className}
-            key={event.id}
-            draggable={draggable}
-            onDragStart={onDragStart || null}
-            onDragOver={this.onDragOver}
-            onDragEnter={this.onDragEnter}
-            onDragLeave={this.onDragLeave}
-            onClick={() => toggleTooltip(event.id)}
-        >
-            <div className='Calendar-Event-inner'>
-                {event.label}
-                {displayTooltip &&
-                    <TooltipComponent
-                        event={event}
-                    />
-                }
+        return <React.Fragment>
+            <div
+                style={style}
+                className={className}
+                key={event.id}
+                draggable={draggable}
+                onDragStart={onDragStart || null}
+                onDragOver={this.onDragOver}
+                onDragEnter={this.onDragEnter}
+                onDragLeave={this.onDragLeave}
+                onClick={() => toggleTooltip(event.id)}
+            >
+                <div className='Calendar-Event-inner'>
+                    {event.label}
+                </div>
             </div>
-        </div>
+            {displayTooltip &&
+                <TooltipComponent
+                    event={event}
+                    topPosition={style.top}
+                />
+            }
+        </React.Fragment>
     }
 }
 

@@ -5,10 +5,14 @@ class Tooltip extends React.Component {
     render() {
         const {
             event,
+            topPosition,
         } = this.props
         return <div
             className="Calendar-Tooltip"
             onClick={e => e.stopPropagation()}
+            style={{
+                top: topPosition,
+            }}
         >
             <div className="Calendar-Tooltip-Title">
                 {event.label}
@@ -22,6 +26,7 @@ class Tooltip extends React.Component {
 
 Tooltip.propTypes = {
     event: PropTypes.object.isRequired,
+    topPosition: PropTypes.string,
 }
 
 export default Tooltip

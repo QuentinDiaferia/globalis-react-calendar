@@ -54,6 +54,18 @@ const events2 = [
         start: moment().hour(11).startOf('hour'),
         end: moment().hour(11).startOf('hour').add(1, 'hour'),
     },
+    {
+        id: 6,
+        label: "6",
+        start: moment('2018-07-31').hour(11).startOf('hour'),
+        end: moment('2018-07-31').hour(11).startOf('hour').add(1, 'hour'),
+    },
+    {
+        id: 7,
+        label: "7",
+        start: moment('2018-08-05').hour(11).startOf('hour'),
+        end: moment('2018-08-05').hour(11).startOf('hour').add(1, 'hour'),
+    },
 ]
 
 const events3 = []
