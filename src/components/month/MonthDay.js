@@ -31,8 +31,13 @@ class MonthDay extends React.Component {
             className += ' Day-inactive'
         }
         return <div className={className}>
-            <div className="day-index">
-                {this.props.date.date()}
+            <div className="Day-Header">
+                <div className="Day-Header-Holiday">
+                    {this.props.date.getFerie()}
+                </div>
+                <div className="Day-Header-Index">
+                    {this.props.date.date()}
+                </div>
             </div>
             {this.renderEvents(this.props.events)}
             {this.renderMoreLink(this.props.events)}

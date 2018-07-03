@@ -100,7 +100,12 @@ class DayEvents extends React.Component {
 	renderHeader() {
 		const day = this.props.date.format('ddd DD')
 		return <div className="Calendar-Day-Grid-Header">
-			{day.charAt(0).toUpperCase() + day.slice(1)}
+			<div className="Calendar-Day-Grid-Header-Day">
+				{day.charAt(0).toUpperCase() + day.slice(1)}
+			</div>
+			<div className="Calendar-Day-Grid-Header-Holiday">
+				{this.props.date.getFerie()}
+			</div>
 		</div>
 	}
 
