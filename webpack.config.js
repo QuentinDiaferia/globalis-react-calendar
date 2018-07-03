@@ -9,7 +9,7 @@ var PUBLIC_DIR = path.resolve(__dirname, 'public')
 module.exports = {
     entry: [
         SRC_DIR + '/index.js',
-        ASSETS_DIR + '/styles/globalis-react-calendar.scss'
+        ASSETS_DIR + '/styles/main.scss'
     ],
     output: {
         path: PUBLIC_DIR,

@@ -113,13 +113,17 @@ class DayEvents extends React.Component {
         </div>
     }
 
+    renderContent() {
+        return <div className="Calendar-Day-Grid-Content">
+            {this.renderTimeSlots()}
+            {this.renderEvents()}
+        </div>
+    }
+
     render() {
         return <div className="Calendar-Day-Grid">
             {this.renderHeader()}
-            <div className="Calendar-Day-Grid-Content">
-                {this.renderTimeSlots()}
-                {this.renderEvents()}
-            </div>
+            {this.renderContent()}
         </div>
     }
 }
