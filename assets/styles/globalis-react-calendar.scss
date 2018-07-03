@@ -88,7 +88,6 @@ $calendar-width-header-slot: 100px;
 
             &-Content {
                 position: relative;
-                overflow: hidden;
 
                 &-TimeSlot {
                     height: $calendar-height-timeslot;
@@ -194,7 +193,7 @@ $calendar-width-header-slot: 100px;
         }
     }
 
-    .Event {
+    &-Event {
         max-width: 100%;
         max-height: 100%;
         color: #fff;
@@ -202,13 +201,11 @@ $calendar-width-header-slot: 100px;
         border-radius: 5px;
         margin-bottom: 1px;
         text-align: left;
-
-        &[draggable=true] {
-            cursor: pointer;
-        }
+        cursor: pointer;
 
         &-inner {
             padding: $calendar-padding-event;
+            position: relative;
         }
 
         &-More {
@@ -225,6 +222,34 @@ $calendar-width-header-slot: 100px;
 
         &-purple {
             background-color: $calendar-color-event-purple;
+        }
+
+    }
+
+    &-Tooltip {
+        cursor: auto;
+        position: absolute;
+        left: 110%;
+        top: 0;
+        width: 150%;
+        border-radius: 5px;
+        z-index: 1;
+        box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14),
+            0 9px 46px 8px rgba(0,0,0,0.12),
+            0 11px 15px -7px rgba(0,0,0,0.2);
+
+        &-Title {
+            background-color: $calendar-color-event;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        &-Content {
+            background-color: #fff;
+            color: #000;
+            padding: 10px;
+            border-radius: 0px 0px 5px 5px;
         }
     }
 }

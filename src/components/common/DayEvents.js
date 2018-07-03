@@ -43,6 +43,7 @@ class DayEvents extends React.Component {
             	style={style}
             	draggable={true}
             	onDragStart={e => this.onDragStart(e, event.id)}
+            	components={this.props.components}
             />
         })
 	}
@@ -126,6 +127,7 @@ DayEvents.propTypes = {
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
     onDropEvent: PropTypes.func.isRequired,
+    components: PropTypes.object.isRequired,
 }
 
 export default DayEvents

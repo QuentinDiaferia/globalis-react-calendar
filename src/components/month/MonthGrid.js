@@ -24,6 +24,7 @@ class Month extends React.Component {
                 language={this.props.language}
                 onClickMore={this.props.onClickMore}
                 displayWeekend={this.props.displayWeekend}
+                components={this.props.components}
             />
         })
     }
@@ -41,6 +42,7 @@ Month.propTypes = {
     language: PropTypes.object.isRequired,
     onClickMore: PropTypes.func.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
+    components: PropTypes.object.isRequired,
 }
 
 export default Month

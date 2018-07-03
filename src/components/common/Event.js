@@ -1,16 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Tooltip from './Tooltip'
+
 class Event extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
             className: '',
+            displayTooltip: false,
         }
         this.onDragOver = this.onDragOver.bind(this)
         this.onDragEnter = this.onDragEnter.bind(this)
         this.onDragLeave = this.onDragLeave.bind(this)
+        this.toggleTooltip = this.toggleTooltip.bind(this)
     }
 
     onDragOver(e) {
@@ -29,15 +33,24 @@ class Event extends React.Component {
         })
     }
 
+    toggleTooltip() {
+        this.setState({
+            displayTooltip: !this.state.displayTooltip,
+        })
+    }
+
     render() {
         const {
             event,
             style,
             draggable,
             onDragStart,
+            components,
         } = this.props
 
-        let className = 'Event'
+        const TooltipComponent = components.tooltip || Tooltip
+
+        let className = 'Calendar-Event'
         if (event.className) {
             className += ` ${event.className}`
         }
@@ -54,9 +67,15 @@ class Event extends React.Component {
                 onDragOver={this.onDragOver}
                 onDragEnter={this.onDragEnter}
                 onDragLeave={this.onDragLeave}
+                onClick={this.toggleTooltip}
             >
-                <div className='Event-inner'>
+                <div className='Calendar-Event-inner'>
                     {event.label}
+                    {this.state.displayTooltip &&
+                        <TooltipComponent
+                            event={event}
+                        />
+                    }
                 </div>
         </div>
     }
@@ -67,6 +86,7 @@ Event.propTypes = {
     style: PropTypes.object.isRequired,
     draggable: PropTypes.bool.isRequired,
     onDragStart: PropTypes.func,
+    components: PropTypes.object.isRequired,
 }
 
 Event.defaultProps = {

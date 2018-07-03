@@ -18,6 +18,7 @@ class Day extends React.Component {
                 startTime={this.props.startTime}
                 endTime={this.props.endTime}
                 onDropEvent={this.props.onDropEvent}
+                components={this.props.components}
             />
         </div>
     }
@@ -29,6 +30,7 @@ Day.propTypes = {
     startTime: PropTypes.number.isRequired,
     endTime: PropTypes.number.isRequired,
     onDropEvent: PropTypes.func.isRequired,
+    components: PropTypes.object.isRequired,
 }
 
 export default Day

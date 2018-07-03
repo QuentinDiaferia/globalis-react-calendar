@@ -105,6 +105,7 @@ class Calendar extends React.Component {
             onClickMore={this.onClickMore}
             displayWeekend={this.state.displayWeekend}
             language={this.props.language}
+            components={this.props.components}
         />
     }
 
@@ -122,6 +123,7 @@ class Calendar extends React.Component {
             displayWeekend={this.state.displayWeekend}
             onDropEvent={this.onDropEvent}
             language={this.props.language}
+            components={this.props.components}
         />
     }
 
@@ -138,6 +140,7 @@ class Calendar extends React.Component {
             endTime={this.state.endTime}
             onDropEvent={this.onDropEvent}
             language={this.props.language}
+            components={this.props.components}
         />
     }
 

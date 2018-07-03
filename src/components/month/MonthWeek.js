@@ -25,6 +25,7 @@ class MonthWeek extends React.Component {
                     events={this.props.events.filter(e => e.start.date() === date.date())}
                     language={this.props.language}
                     onClickMore={this.props.onClickMore}
+                    components={this.props.components}
     			/>
     		})}
     	</div>
@@ -38,6 +39,7 @@ MonthWeek.propTypes = {
     language: PropTypes.object.isRequired,
     onClickMore: PropTypes.func.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
+    components: PropTypes.object.isRequired,
 }
 
 export default MonthWeek
