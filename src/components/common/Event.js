@@ -63,7 +63,7 @@ class Event extends React.Component {
                 onDragLeave={this.onDragLeave}
                 onClick={() => toggleTooltip(event.id)}
             >
-                <div className='Calendar-Event-inner'>
+                <div className='Calendar-Event-Inner'>
                     {event.label}
                 </div>
             </div>

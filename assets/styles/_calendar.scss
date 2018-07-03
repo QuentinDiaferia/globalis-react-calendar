@@ -1,24 +1,3 @@
-$calendar-color-border: #ddd;
-$calendar-color-inactive-day: #e5e5e5;;
-$calendar-color-inactive-day-index: #999999;
-$calendar-color-active-time-slot: #999999;
-$calendar-color-event: #3174ad;
-$calendar-color-event-green: #33b679;
-$calendar-color-event-purple: #3f51b5;
-$calendar-color-more: #3174ad;
-$calendar-color-holiday: #77777f;
-
-$calendar-font-size: 14px;
-$calendar-font-family: Arial;
-
-$calendar-padding-event: 4px;
-
-$calendar-height-header: 60px;
-$calendar-height-timeslot: 40px;
-$calendar-height-day: 100px;
-
-$calendar-width-header-slot: 100px;
-
 .Calendar {
     height: 100%;
     font-size: $calendar-font-size;
@@ -168,7 +147,7 @@ $calendar-width-header-slot: 100px;
                         border-left: 1px solid $calendar-color-border;
                     }
 
-                    .Day-Header {
+                    &-Header {
                         display: flex;
                         justify-content: space-between;
                         padding: 4px;
@@ -182,12 +161,9 @@ $calendar-width-header-slot: 100px;
                         }
                     }
 
-                    &.Day-inactive {
-                        background-color: $calendar-color-inactive-day;
-
-                        .Day-Header-Index {
-                            color: $calendar-color-inactive-day-index;
-                        }
+                    &-OutOfMonth {
+                        background-color: $calendar-color-outofmonth-day;
+                        color: $calendar-color-outofmonth-day-index;
                     }
                 }
             }
@@ -204,7 +180,7 @@ $calendar-width-header-slot: 100px;
         text-align: left;
         cursor: pointer;
 
-        &-inner {
+        &-Inner {
             padding: $calendar-padding-event;
         }
 

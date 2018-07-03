@@ -39,16 +39,16 @@ class MonthDay extends React.Component {
 
         let className = 'Calendar-Month-Grid-Week-Day'
         if (outOfMonth) {
-            className += ' Day-inactive'
+            className += ' Calendar-Month-Grid-Week-Day-OutOfMonth'
         }
 
         return <div className={className}>
-            <div className="Day-Header">
-                <div className="Day-Header-Holiday">
+            <div className="Calendar-Month-Grid-Week-Day-Header">
+                <div className="Calendar-Month-Grid-Week-Day-Header-Holiday">
                     {date.getFerie()}
                 </div>
                 <div
-                    className="Day-Header-Index"
+                    className="Calendar-Month-Grid-Week-Day-Header-Index"
                     onClick={() => goToDay(date)}
                 >
                     {date.date()}
