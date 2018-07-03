@@ -9,12 +9,10 @@ class Event extends React.Component {
         super(props)
         this.state = {
             className: '',
-            displayTooltip: false,
         }
         this.onDragOver = this.onDragOver.bind(this)
         this.onDragEnter = this.onDragEnter.bind(this)
         this.onDragLeave = this.onDragLeave.bind(this)
-        this.toggleTooltip = this.toggleTooltip.bind(this)
     }
 
     onDragOver(e) {
@@ -33,12 +31,6 @@ class Event extends React.Component {
         })
     }
 
-    toggleTooltip() {
-        this.setState({
-            displayTooltip: !this.state.displayTooltip,
-        })
-    }
-
     render() {
         const {
             event,
@@ -46,6 +38,8 @@ class Event extends React.Component {
             draggable,
             onDragStart,
             components,
+            displayTooltip,
+            toggleTooltip,
         } = this.props
 
         const TooltipComponent = components.tooltip || Tooltip
@@ -59,24 +53,24 @@ class Event extends React.Component {
         }
 
         return <div
-                style={style}
-                className={className}
-                key={event.id}
-                draggable={draggable}
-                onDragStart={onDragStart || null}
-                onDragOver={this.onDragOver}
-                onDragEnter={this.onDragEnter}
-                onDragLeave={this.onDragLeave}
-                onClick={this.toggleTooltip}
-            >
-                <div className='Calendar-Event-inner'>
-                    {event.label}
-                    {this.state.displayTooltip &&
-                        <TooltipComponent
-                            event={event}
-                        />
-                    }
-                </div>
+            style={style}
+            className={className}
+            key={event.id}
+            draggable={draggable}
+            onDragStart={onDragStart || null}
+            onDragOver={this.onDragOver}
+            onDragEnter={this.onDragEnter}
+            onDragLeave={this.onDragLeave}
+            onClick={() => toggleTooltip(event.id)}
+        >
+            <div className='Calendar-Event-inner'>
+                {event.label}
+                {displayTooltip &&
+                    <TooltipComponent
+                        event={event}
+                    />
+                }
+            </div>
         </div>
     }
 }
@@ -87,11 +81,14 @@ Event.propTypes = {
     draggable: PropTypes.bool.isRequired,
     onDragStart: PropTypes.func,
     components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.bool,
 }
 
 Event.defaultProps = {
     style: {},
     draggable: false,
+    displayTooltip: false,
 }
 
 export default Event

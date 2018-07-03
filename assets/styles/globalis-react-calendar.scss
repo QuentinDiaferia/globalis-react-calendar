@@ -18,6 +18,7 @@ $calendar-height-timeslot: 40px;
 $calendar-height-day: 100px;
 
 $calendar-width-header-slot: 100px;
+$calendar-width-tooltip: 250px;
 
 .Calendar {
     height: 100%;
@@ -102,7 +103,7 @@ $calendar-width-header-slot: 100px;
                     }
                 }
 
-                .Event {
+                .Calendar-Event {
                     position: absolute;
 
                     &.drag {
@@ -229,9 +230,10 @@ $calendar-width-header-slot: 100px;
     &-Tooltip {
         cursor: auto;
         position: absolute;
-        left: 110%;
-        top: 0;
-        width: 150%;
+        left: 100%;
+        margin-left: 15px;
+        top: 10px;
+        width: $calendar-width-tooltip;
         border-radius: 5px;
         z-index: 1;
         box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14),

@@ -6,6 +6,20 @@ import TimeSlotsHeader from '../common/TimeSlotsHeader'
 import DayEvents from '../common/DayEvents'
 
 class Day extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            displayTooltip: null,
+        }
+        this.toggleTooltip = this.toggleTooltip.bind(this)
+    }
+
+    toggleTooltip(eventId) {
+        this.setState({
+            displayTooltip: eventId === this.state.displayTooltip ? null : eventId
+        })
+    }
+
     render() {
         return <div className="Calendar-Day">
             <TimeSlotsHeader
@@ -19,6 +33,8 @@ class Day extends React.Component {
                 endTime={this.props.endTime}
                 onDropEvent={this.props.onDropEvent}
                 components={this.props.components}
+                toggleTooltip={this.toggleTooltip}
+                displayTooltip={this.state.displayTooltip}
             />
         </div>
     }

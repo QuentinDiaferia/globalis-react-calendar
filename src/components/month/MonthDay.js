@@ -10,6 +10,8 @@ class MonthDay extends React.Component {
                 key={event.id}
                 event={event}
                 components={this.props.components}
+                toggleTooltip={this.props.toggleTooltip}
+                displayTooltip={this.props.displayTooltip === event.id}
             />
         })
     }
@@ -53,6 +55,8 @@ MonthDay.propTypes = {
     language: PropTypes.object.isRequired,
     onClickMore: PropTypes.func.isRequired,
     components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.number,
 }
 
 export default MonthDay

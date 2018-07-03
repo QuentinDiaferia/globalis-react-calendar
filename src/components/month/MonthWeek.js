@@ -26,6 +26,8 @@ class MonthWeek extends React.Component {
                     language={this.props.language}
                     onClickMore={this.props.onClickMore}
                     components={this.props.components}
+                    toggleTooltip={this.props.toggleTooltip}
+                    displayTooltip={this.props.displayTooltip}
     			/>
     		})}
     	</div>
@@ -40,6 +42,8 @@ MonthWeek.propTypes = {
     onClickMore: PropTypes.func.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
     components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.number,
 }
 
 export default MonthWeek
