@@ -6,35 +6,31 @@ import TimeSlotsHeader from '../common/TimeSlotsHeader'
 import DayEvents from '../common/DayEvents'
 
 class Day extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            displayTooltip: null,
-        }
-        this.toggleTooltip = this.toggleTooltip.bind(this)
-    }
-
-    toggleTooltip(eventId) {
-        this.setState({
-            displayTooltip: eventId === this.state.displayTooltip ? null : eventId
-        })
-    }
-
     render() {
+        const {
+            date,
+            events,
+            startTime,
+            endTime,
+            onDropEvent,
+            toggleTooltip,
+            displayTooltip,
+            components,
+        } = this.props
         return <div className="Calendar-Day">
             <TimeSlotsHeader
-                startTime={this.props.startTime}
-                endTime={this.props.endTime}
+                startTime={startTime}
+                endTime={endTime}
             />
             <DayEvents
-                date={this.props.date}
-                events={this.props.events.filter(e => e.start.date() === this.props.date.date())}
-                startTime={this.props.startTime}
-                endTime={this.props.endTime}
-                onDropEvent={this.props.onDropEvent}
-                components={this.props.components}
-                toggleTooltip={this.toggleTooltip}
-                displayTooltip={this.state.displayTooltip}
+                date={date}
+                events={events.filter(e => e.start.date() === date.date())}
+                startTime={startTime}
+                endTime={endTime}
+                onDropEvent={onDropEvent}
+                components={components}
+                toggleTooltip={toggleTooltip}
+                displayTooltip={displayTooltip}
             />
         </div>
     }
@@ -47,6 +43,8 @@ Day.propTypes = {
     endTime: PropTypes.number.isRequired,
     onDropEvent: PropTypes.func.isRequired,
     components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.number,
 }
 
 export default Day

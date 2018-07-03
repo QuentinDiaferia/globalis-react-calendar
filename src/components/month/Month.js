@@ -6,18 +6,29 @@ import MonthGrid from './MonthGrid'
 
 class Month extends React.Component {
     render() {
+        const {
+            date,
+            events,
+            language,
+            onClickMore,
+            displayWeekend,
+            components,
+            toggleTooltip,
+            displayTooltip,
+        } = this.props
         return <div className="Calendar-Month">
             <MonthHeader
-                displayWeekend={this.props.displayWeekend}
+                displayWeekend={displayWeekend}
             />
             <MonthGrid
-                key={this.props.date.format('YYYY-MM')}
-                date={this.props.date}
-                events={this.props.events}
-                language={this.props.language}
-                onClickMore={this.props.onClickMore}
-                displayWeekend={this.props.displayWeekend}
-                components={this.props.components}
+                date={date}
+                events={events}
+                language={language}
+                onClickMore={onClickMore}
+                displayWeekend={displayWeekend}
+                components={components}
+                toggleTooltip={toggleTooltip}
+                displayTooltip={displayTooltip}
             />
         </div>
     }
@@ -30,6 +41,8 @@ Month.propTypes = {
     onClickMore: PropTypes.func.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
     components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.number,
 }
 
 export default Month

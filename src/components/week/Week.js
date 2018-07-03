@@ -15,7 +15,6 @@ class Week extends React.Component {
 
         return <div className="Calendar-Week">
             <WeekGrid
-                key={this.props.date.format('YYYY-w')}
                 days={days}
                 events={this.props.events}
                 startTime={this.props.startTime}
@@ -23,6 +22,8 @@ class Week extends React.Component {
                 displayWeekend={this.props.displayWeekend}
                 onDropEvent={this.props.onDropEvent}
                 components={this.props.components}
+                toggleTooltip={this.props.toggleTooltip}
+                displayTooltip={this.props.displayTooltip}
             />
         </div>
     }
@@ -36,6 +37,8 @@ Week.propTypes = {
     displayWeekend: PropTypes.bool.isRequired,
     onDropEvent: PropTypes.func.isRequired,
     components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.number,
 }
 
 export default Week

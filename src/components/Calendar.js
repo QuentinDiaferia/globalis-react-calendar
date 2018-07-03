@@ -20,6 +20,7 @@ class Calendar extends React.Component {
             endTime: props.endTime,
             displayWeekend: props.displayWeekend,
             displaySettingsForm: false,
+            displayTooltip: null,
         }
         this.renderCalendar = this.renderCalendar.bind(this)
         this.changeView = this.changeView.bind(this)
@@ -28,6 +29,7 @@ class Calendar extends React.Component {
         this.onClickMore = this.onClickMore.bind(this)
         this.onDropEvent = this.onDropEvent.bind(this)
         this.toggleSettingsForm = this.toggleSettingsForm.bind(this)
+        this.toggleTooltip = this.toggleTooltip.bind(this)
     }
 
     changeView(view) {
@@ -56,6 +58,18 @@ class Calendar extends React.Component {
         })
     }
 
+    toggleTooltip(eventId) {
+        this.setState({
+            displayTooltip: eventId === this.state.displayTooltip ? null : eventId
+        })
+    }
+
+    closeTooltip() {
+        this.setState({
+            displayTooltip: null,
+        })
+    }
+
     onNavigate(direction) {
         let date
         switch (direction) {
@@ -70,7 +84,10 @@ class Calendar extends React.Component {
                 date = moment().startOf('day')
                 break
         }
-        this.setState({date})
+        this.setState({
+            date,
+            displayTooltip: null,
+        })
     }
 
     onClickMore(date) {
@@ -106,6 +123,8 @@ class Calendar extends React.Component {
             displayWeekend={this.state.displayWeekend}
             language={this.props.language}
             components={this.props.components}
+            toggleTooltip={this.toggleTooltip}
+            displayTooltip={this.state.displayTooltip}
         />
     }
 
@@ -124,6 +143,8 @@ class Calendar extends React.Component {
             onDropEvent={this.onDropEvent}
             language={this.props.language}
             components={this.props.components}
+            toggleTooltip={this.toggleTooltip}
+            displayTooltip={this.state.displayTooltip}
         />
     }
 
@@ -134,7 +155,6 @@ class Calendar extends React.Component {
             && event.end.hour() <= this.state.endTime
         })
         return <Day
-            key={this.state.date.format('YYYY-MM-DD')}
             date={this.state.date}
             events={events}
             startTime={this.state.startTime}
@@ -142,6 +162,8 @@ class Calendar extends React.Component {
             onDropEvent={this.onDropEvent}
             language={this.props.language}
             components={this.props.components}
+            toggleTooltip={this.toggleTooltip}
+            displayTooltip={this.state.displayTooltip}
         />
     }
 

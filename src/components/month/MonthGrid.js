@@ -5,20 +5,6 @@ import moment from 'moment'
 import MonthWeek from './MonthWeek'
 
 class Month extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            displayTooltip: null,
-        }
-        this.toggleTooltip = this.toggleTooltip.bind(this)
-    }
-
-    toggleTooltip(eventId) {
-        this.setState({
-            displayTooltip: eventId === this.state.displayTooltip ? null : eventId
-        })
-    }
-
     renderWeeks() {
         const selectedMonth = this.props.date.month(),
             start =  moment(this.props.date).startOf('month').startOf('isoWeek'),
@@ -39,8 +25,8 @@ class Month extends React.Component {
                 onClickMore={this.props.onClickMore}
                 displayWeekend={this.props.displayWeekend}
                 components={this.props.components}
-                toggleTooltip={this.toggleTooltip}
-                displayTooltip={this.state.displayTooltip}
+                toggleTooltip={this.props.toggleTooltip}
+                displayTooltip={this.props.displayTooltip}
             />
         })
     }
@@ -59,6 +45,8 @@ Month.propTypes = {
     onClickMore: PropTypes.func.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
     components: PropTypes.object.isRequired,
+    toggleTooltip: PropTypes.func.isRequired,
+    displayTooltip: PropTypes.number,
 }
 
 export default Month
