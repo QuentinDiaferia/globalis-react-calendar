@@ -45,6 +45,7 @@ class DayEvents extends React.Component {
                 onDragStart={e => this.onDragStart(e, event.id)}
                 components={this.props.components}
                 toggleTooltip={this.props.toggleTooltip}
+                closeTooltip={this.props.closeTooltip}
                 displayTooltip={this.props.displayTooltip === event.id}
             />
         })
@@ -126,6 +127,7 @@ DayEvents.propTypes = {
     onDropEvent: PropTypes.func.isRequired,
     components: PropTypes.object.isRequired,
     toggleTooltip: PropTypes.func.isRequired,
+    closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.number,
 }
 

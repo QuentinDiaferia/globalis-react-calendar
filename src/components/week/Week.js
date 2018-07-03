@@ -23,6 +23,7 @@ class Week extends React.Component {
                 onDropEvent={this.props.onDropEvent}
                 components={this.props.components}
                 toggleTooltip={this.props.toggleTooltip}
+                closeTooltip={this.props.closeTooltip}
                 displayTooltip={this.props.displayTooltip}
             />
         </div>
@@ -38,6 +39,7 @@ Week.propTypes = {
     onDropEvent: PropTypes.func.isRequired,
     components: PropTypes.object.isRequired,
     toggleTooltip: PropTypes.func.isRequired,
+    closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.number,
 }
 

@@ -14,6 +14,7 @@ class Day extends React.Component {
             endTime,
             onDropEvent,
             toggleTooltip,
+            closeTooltip,
             displayTooltip,
             components,
         } = this.props
@@ -30,6 +31,7 @@ class Day extends React.Component {
                 onDropEvent={onDropEvent}
                 components={components}
                 toggleTooltip={toggleTooltip}
+                closeTooltip={closeTooltip}
                 displayTooltip={displayTooltip}
             />
         </div>
@@ -44,6 +46,7 @@ Day.propTypes = {
     onDropEvent: PropTypes.func.isRequired,
     components: PropTypes.object.isRequired,
     toggleTooltip: PropTypes.func.isRequired,
+    closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.number,
 }
 

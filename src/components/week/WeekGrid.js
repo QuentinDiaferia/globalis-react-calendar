@@ -15,6 +15,7 @@ class WeekGrid extends React.Component {
             onDropEvent,
             components,
             toggleTooltip,
+            closeTooltip,
             displayTooltip,
         } = this.props
         return <div className="Calendar-Week-Grid">
@@ -36,6 +37,7 @@ class WeekGrid extends React.Component {
                     onDropEvent={onDropEvent}
                     components={components}
                     toggleTooltip={toggleTooltip}
+                    closeTooltip={closeTooltip}
                     displayTooltip={displayTooltip}
                 />
             })}
@@ -52,6 +54,7 @@ WeekGrid.propTypes = {
     onDropEvent: PropTypes.func.isRequired,
     components: PropTypes.object.isRequired,
     toggleTooltip: PropTypes.func.isRequired,
+    closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.number,
 }
 

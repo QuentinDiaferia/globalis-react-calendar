@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import {navigation, views} from '../utils/constants'
 
-import ToolBar from './ToolBar'
-import SettingsForm from './SettingsForm'
 import Month from './month/Month'
 import Week from './week/Week'
 import Day from './day/Day'
@@ -26,10 +24,12 @@ class Calendar extends React.Component {
         this.changeView = this.changeView.bind(this)
         this.changeSettings = this.changeSettings.bind(this)
         this.onNavigate = this.onNavigate.bind(this)
+        this.goToDay = this.goToDay.bind(this)
         this.onClickMore = this.onClickMore.bind(this)
         this.onDropEvent = this.onDropEvent.bind(this)
         this.toggleSettingsForm = this.toggleSettingsForm.bind(this)
         this.toggleTooltip = this.toggleTooltip.bind(this)
+        this.closeTooltip = this.closeTooltip.bind(this)
     }
 
     changeView(view) {
@@ -90,6 +90,14 @@ class Calendar extends React.Component {
         })
     }
 
+    goToDay(date) {
+        this.setState({
+            date,
+            view: views.DAY,
+            displayTooltip: null,
+        })
+    }
+
     onClickMore(date) {
         this.setState({
             view: views.DAY,
@@ -120,10 +128,12 @@ class Calendar extends React.Component {
             date={this.state.date}
             events={this.state.events.filter(event => event.start.isSame(this.state.date, 'month'))}
             onClickMore={this.onClickMore}
+            goToDay={this.goToDay}
             displayWeekend={this.state.displayWeekend}
             language={this.props.language}
             components={this.props.components}
             toggleTooltip={this.toggleTooltip}
+            closeTooltip={this.closeTooltip}
             displayTooltip={this.state.displayTooltip}
         />
     }
@@ -144,6 +154,7 @@ class Calendar extends React.Component {
             language={this.props.language}
             components={this.props.components}
             toggleTooltip={this.toggleTooltip}
+            closeTooltip={this.closeTooltip}
             displayTooltip={this.state.displayTooltip}
         />
     }
@@ -163,6 +174,7 @@ class Calendar extends React.Component {
             language={this.props.language}
             components={this.props.components}
             toggleTooltip={this.toggleTooltip}
+            closeTooltip={this.closeTooltip}
             displayTooltip={this.state.displayTooltip}
         />
     }
@@ -180,19 +192,21 @@ class Calendar extends React.Component {
     }
 
     render() {
-        const ToolBarComponent = this.props.components.toolbar || ToolBar
-        const SettingsFormComponent = this.props.components.settingsForm || SettingsForm
+        const ToolBarComponent = this.props.components.toolbar || null
+        const SettingsFormComponent = this.props.components.settingsForm || null
         return <div className="Calendar">
-            <ToolBarComponent
-                date={this.state.date}
-                view={this.state.view}
-                onNavigate={this.onNavigate}
-                changeView={this.changeView}
-                toggleSettingsForm={this.toggleSettingsForm}
-                language={this.props.language}
-                components={this.props.components}
-            />
-            {this.state.displaySettingsForm &&
+            {ToolBarComponent &&
+                <ToolBarComponent
+                    date={this.state.date}
+                    view={this.state.view}
+                    onNavigate={this.onNavigate}
+                    changeView={this.changeView}
+                    toggleSettingsForm={this.toggleSettingsForm}
+                    language={this.props.language}
+                    components={this.props.components}
+                />
+            }
+            {this.state.displaySettingsForm && SettingsFormComponent &&
                 <SettingsFormComponent
                     changeSettings={this.changeSettings}
                     language={this.props.language}

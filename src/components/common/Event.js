@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Tooltip from './Tooltip'
-
 class Event extends React.Component {
 
     constructor(props) {
@@ -39,10 +37,11 @@ class Event extends React.Component {
             onDragStart,
             components,
             displayTooltip,
+            closeTooltip,
             toggleTooltip,
         } = this.props
 
-        const TooltipComponent = components.tooltip || Tooltip
+        const TooltipComponent = components.tooltip || null
 
         let className = 'Calendar-Event'
         if (event.className) {
@@ -68,10 +67,11 @@ class Event extends React.Component {
                     {event.label}
                 </div>
             </div>
-            {displayTooltip &&
+            {displayTooltip && TooltipComponent &&
                 <TooltipComponent
                     event={event}
                     topPosition={style.top}
+                    closeTooltip={closeTooltip}
                 />
             }
         </React.Fragment>
@@ -85,6 +85,7 @@ Event.propTypes = {
     onDragStart: PropTypes.func,
     components: PropTypes.object.isRequired,
     toggleTooltip: PropTypes.func.isRequired,
+    closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.bool,
 }
 

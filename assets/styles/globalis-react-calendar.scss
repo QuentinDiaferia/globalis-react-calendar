@@ -18,7 +18,6 @@ $calendar-height-timeslot: 40px;
 $calendar-height-day: 100px;
 
 $calendar-width-header-slot: 100px;
-$calendar-width-tooltip: 250px;
 
 .Calendar {
     height: 100%;
@@ -34,10 +33,6 @@ $calendar-width-tooltip: 250px;
         &-SubGroup {
             display: flex;
         }
-    }
-
-    &-SettingsForm {
-        margin-bottom: 15px;
     }
 
     &-Day {
@@ -178,6 +173,10 @@ $calendar-width-tooltip: 250px;
                         justify-content: space-between;
                         padding: 4px;
 
+                        &-Index {
+                            cursor: pointer;
+                        }
+
                         &-Holiday {
                             color: $calendar-color-holiday;
                         }
@@ -186,7 +185,7 @@ $calendar-width-tooltip: 250px;
                     &.Day-inactive {
                         background-color: $calendar-color-inactive-day;
 
-                        .day-index {
+                        .Day-Header-Index {
                             color: $calendar-color-inactive-day-index;
                         }
                     }
@@ -225,50 +224,5 @@ $calendar-width-tooltip: 250px;
             background-color: $calendar-color-event-purple;
         }
 
-    }
-
-    &-Tooltip {
-        width: $calendar-width-tooltip;
-        border-radius: 5px;
-        z-index: 1;
-        box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14),
-            0 9px 46px 8px rgba(0,0,0,0.12),
-            0 11px 15px -7px rgba(0,0,0,0.2);
-
-        .Calendar-Day & {
-            position: absolute;
-            width: 50%;
-            left: 25%;
-            margin-top: 15px;
-        }
-
-        .Calendar-Week & {
-            width: $calendar-width-tooltip;
-            position: absolute;
-            left: 100%;
-            margin: 15px;
-        }
-
-        .Calendar-Month & {
-            width: $calendar-width-tooltip;
-            position: absolute;
-            left: 100%;
-            top: 0;
-            margin: 15px;
-        }
-
-        &-Title {
-            background-color: $calendar-color-event;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px 5px 0px 0px;
-        }
-
-        &-Content {
-            background-color: #fff;
-            color: #000;
-            padding: 10px;
-            border-radius: 0px 0px 5px 5px;
-        }
     }
 }

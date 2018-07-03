@@ -16,6 +16,9 @@ class Tooltip extends React.Component {
         >
             <div className="Calendar-Tooltip-Title">
                 {event.label}
+                <div>
+                    <a onClick={e => this.props.closeTooltip()}>close</a>
+                </div>
             </div>
             <div className="Calendar-Tooltip-Content">
                 Event id : {event.id}
@@ -26,6 +29,7 @@ class Tooltip extends React.Component {
 
 Tooltip.propTypes = {
     event: PropTypes.object.isRequired,
+    closeTooltip: PropTypes.func.isRequired,
     topPosition: PropTypes.string,
 }
 
