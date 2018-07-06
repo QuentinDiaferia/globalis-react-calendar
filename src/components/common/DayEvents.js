@@ -27,7 +27,7 @@ class DayEvents extends React.Component {
 
             const top = (100 / timeSpan) * beginning
             const height = (100 / timeSpan) * duration
-            const width = 100 / event.maxOverlap
+            const width = 90 / event.maxOverlap
             const left = event.hindex * width
 
             const style = {
