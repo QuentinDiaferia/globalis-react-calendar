@@ -17,11 +17,8 @@ class ToolBar extends React.Component {
             toggleSettingsForm,
             language,
         } = this.props
-        const NavigationComponent = this.props.components.navigation || Navigation
-        const ViewSwitcherComponent = this.props.components.viewSwitcher || ViewSwitcher
-        const SettingsComponent = this.props.components.settings || Settings
         return <div className="Calendar-ToolBar">
-            <NavigationComponent
+            <Navigation
                 onNavigate={onNavigate}
                 language={language}
             />
@@ -30,11 +27,11 @@ class ToolBar extends React.Component {
                 date={date}
             />
             <div className="Calendar-ToolBar-SubGroup">
-                <ViewSwitcherComponent
+                <ViewSwitcher
                     changeView={changeView}
                     language={language}
                 />
-                <SettingsComponent
+                <Settings
                     language={language}
                     toggleSettingsForm={toggleSettingsForm}
                 />
@@ -50,7 +47,6 @@ ToolBar.propTypes = {
     onNavigate: PropTypes.func.isRequired,
     changeView: PropTypes.func.isRequired,
     toggleSettingsForm: PropTypes.func.isRequired,
-    components: PropTypes.object.isRequired,
 }
 
 ToolBar.defaultProps = {

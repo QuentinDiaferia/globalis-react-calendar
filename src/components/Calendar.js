@@ -11,51 +11,14 @@ class Calendar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            view: props.view,
-            date: moment(props.date).startOf('day'),
             events: props.events.sort((e1, e2) => e1.start.diff(e2.start)),
-            startTime: props.startTime,
-            endTime: props.endTime,
-            displayWeekend: props.displayWeekend,
-            displaySettingsForm: false,
             displayTooltip: null,
         }
-        this.renderCalendar = this.renderCalendar.bind(this)
-        this.changeView = this.changeView.bind(this)
-        this.changeSettings = this.changeSettings.bind(this)
-        this.onNavigate = this.onNavigate.bind(this)
-        this.goToDay = this.goToDay.bind(this)
+        this.onClickDay = this.onClickDay.bind(this)
         this.onClickMore = this.onClickMore.bind(this)
         this.onDropEvent = this.onDropEvent.bind(this)
-        this.toggleSettingsForm = this.toggleSettingsForm.bind(this)
         this.toggleTooltip = this.toggleTooltip.bind(this)
         this.closeTooltip = this.closeTooltip.bind(this)
-    }
-
-    changeView(view) {
-        let date = moment(this.state.date)
-        if (this.state.view !== views.DAY) {
-            date.startOf('week')
-        }
-        this.setState({
-            date,
-            view,
-        })
-    }
-
-    changeSettings(startTime, endTime, displayWeekend) {
-        this.setState({
-            startTime,
-            endTime,
-            displayWeekend,
-            displaySettingsForm: false,
-        })
-    }
-
-    toggleSettingsForm() {
-        this.setState({
-            displaySettingsForm: !this.state.displaySettingsForm,
-        })
     }
 
     toggleTooltip(eventId) {
@@ -70,39 +33,16 @@ class Calendar extends React.Component {
         })
     }
 
-    onNavigate(direction) {
-        let date
-        switch (direction) {
-            case navigation.PREVIOUS:
-                date = moment(this.state.date).subtract(1, this.state.view).startOf('day')
-                break
-            case navigation.NEXT:
-                date = moment(this.state.date).add(1, this.state.view).startOf('day')
-                break
-            case navigation.TODAY:
-            default:
-                date = moment().startOf('day')
-                break
+    onClickDay(date) {
+        if (this.props.onClickDay) {
+            this.props.onClickDay(date)
         }
-        this.setState({
-            date,
-            displayTooltip: null,
-        })
-    }
-
-    goToDay(date) {
-        this.setState({
-            date,
-            view: views.DAY,
-            displayTooltip: null,
-        })
     }
 
     onClickMore(date) {
-        this.setState({
-            view: views.DAY,
-            date,
-        })
+        if (this.props.onClickMore) {
+            this.props.onClickMore(date)
+        }
     }
 
     onDropEvent(eventId, date, hour) {
@@ -125,11 +65,11 @@ class Calendar extends React.Component {
 
     renderMonth() {
         return <Month
-            date={this.state.date}
-            events={this.state.events.filter(event => event.start.isSame(this.state.date, 'month'))}
+            date={this.props.date}
+            events={this.state.events.filter(event => event.start.isSame(this.props.date, 'month'))}
             onClickMore={this.onClickMore}
-            goToDay={this.goToDay}
-            displayWeekend={this.state.displayWeekend}
+            onClickDay={this.onClickDay}
+            displayWeekend={this.props.displayWeekend}
             language={this.props.language}
             components={this.props.components}
             toggleTooltip={this.toggleTooltip}
@@ -140,16 +80,16 @@ class Calendar extends React.Component {
 
     renderWeek() {
         const events = this.state.events.filter(event => {
-            return event.start.isSame(this.state.date, 'week')
-            && event.start.hour() >= this.state.startTime
-            && event.end.hour() <= this.state.endTime
+            return event.start.isSame(this.props.date, 'week')
+            && event.start.hour() >= this.props.startTime
+            && event.end.hour() <= this.props.endTime
         })
         return <Week
-            date={this.state.date}
+            date={this.props.date}
             events={events}
-            startTime={this.state.startTime}
-            endTime={this.state.endTime}
-            displayWeekend={this.state.displayWeekend}
+            startTime={this.props.startTime}
+            endTime={this.props.endTime}
+            displayWeekend={this.props.displayWeekend}
             onDropEvent={this.onDropEvent}
             language={this.props.language}
             components={this.props.components}
@@ -161,15 +101,15 @@ class Calendar extends React.Component {
 
     renderDay() {
         const events = this.state.events.filter(event => {
-            return event.start.isSame(this.state.date, 'day')
-            && event.start.hour() >= this.state.startTime
-            && event.end.hour() <= this.state.endTime
+            return event.start.isSame(this.props.date, 'day')
+            && event.start.hour() >= this.props.startTime
+            && event.end.hour() <= this.props.endTime
         })
         return <Day
-            date={this.state.date}
+            date={this.props.date}
             events={events}
-            startTime={this.state.startTime}
-            endTime={this.state.endTime}
+            startTime={this.props.startTime}
+            endTime={this.props.endTime}
             onDropEvent={this.onDropEvent}
             language={this.props.language}
             components={this.props.components}
@@ -180,7 +120,7 @@ class Calendar extends React.Component {
     }
 
     renderCalendar() {
-        switch (this.state.view) {
+        switch (this.props.view) {
             case views.DAY:
                 return this.renderDay()
             case views.WEEK:
@@ -192,29 +132,7 @@ class Calendar extends React.Component {
     }
 
     render() {
-        const ToolBarComponent = this.props.components.toolbar || null
-        const SettingsFormComponent = this.props.components.settingsForm || null
         return <div className="Calendar">
-            {ToolBarComponent &&
-                <ToolBarComponent
-                    date={this.state.date}
-                    view={this.state.view}
-                    onNavigate={this.onNavigate}
-                    changeView={this.changeView}
-                    toggleSettingsForm={this.toggleSettingsForm}
-                    language={this.props.language}
-                    components={this.props.components}
-                />
-            }
-            {this.state.displaySettingsForm && SettingsFormComponent &&
-                <SettingsFormComponent
-                    changeSettings={this.changeSettings}
-                    language={this.props.language}
-                    startTime={this.state.startTime}
-                    endTime={this.state.endTime}
-                    displayWeekend={this.state.displayWeekend}
-                />
-            }
             {this.renderCalendar()}
         </div>
     }
@@ -228,6 +146,8 @@ Calendar.propTypes = {
     endTime: PropTypes.number.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
     components: PropTypes.object.isRequired,
+    onClickMore: PropTypes.func,
+    onClickDay: PropTypes.func,
 }
 
 Calendar.defaultProps = {

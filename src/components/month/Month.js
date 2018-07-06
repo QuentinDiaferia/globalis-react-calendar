@@ -11,7 +11,7 @@ class Month extends React.Component {
             events,
             language,
             onClickMore,
-            goToDay,
+            onClickDay,
             displayWeekend,
             components,
             toggleTooltip,
@@ -27,7 +27,7 @@ class Month extends React.Component {
                 events={events}
                 language={language}
                 onClickMore={onClickMore}
-                goToDay={goToDay}
+                onClickDay={onClickDay}
                 displayWeekend={displayWeekend}
                 components={components}
                 toggleTooltip={toggleTooltip}
@@ -43,7 +43,7 @@ Month.propTypes = {
     events: PropTypes.array.isRequired,
     language: PropTypes.object.isRequired,
     onClickMore: PropTypes.func.isRequired,
-    goToDay: PropTypes.func.isRequired,
+    onClickDay: PropTypes.func.isRequired,
     displayWeekend: PropTypes.bool.isRequired,
     components: PropTypes.object.isRequired,
     toggleTooltip: PropTypes.func.isRequired,

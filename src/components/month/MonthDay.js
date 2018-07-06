@@ -34,7 +34,7 @@ class MonthDay extends React.Component {
             date,
             events,
             outOfMonth,
-            goToDay,
+            onClickDay,
         } = this.props
 
         let className = 'Calendar-Month-Grid-Week-Day'
@@ -49,7 +49,7 @@ class MonthDay extends React.Component {
                 </div>
                 <div
                     className="Calendar-Month-Grid-Week-Day-Header-Index"
-                    onClick={() => goToDay(date)}
+                    onClick={() => onClickDay(date)}
                 >
                     {date.date()}
                 </div>
@@ -66,7 +66,7 @@ MonthDay.propTypes = {
     events: PropTypes.array.isRequired,
     language: PropTypes.object.isRequired,
     onClickMore: PropTypes.func.isRequired,
-    goToDay: PropTypes.func.isRequired,
+    onClickDay: PropTypes.func.isRequired,
     components: PropTypes.object.isRequired,
     toggleTooltip: PropTypes.func.isRequired,
     closeTooltip: PropTypes.func.isRequired,
