@@ -42,15 +42,20 @@ class Event extends React.Component {
         } = this.props
 
         const TooltipComponent = components.tooltip || null
-        const eventStyle = Object.assign({}, style)
 
+        let className = 'Calendar-Event'
+        if (this.state.className) {
+            className += ` ${this.state.className}`
+        }
+
+        const eventStyle = Object.assign({}, style)
         if (event.hex_color) {
             eventStyle.backgroundColor = event.hex_color
         }
 
         return <React.Fragment>
             <div
-                className='Calendar-Event'
+                className={className}
                 style={eventStyle}
                 key={event.id}
                 draggable={draggable}
