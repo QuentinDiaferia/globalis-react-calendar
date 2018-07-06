@@ -13,8 +13,8 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            date: moment(),
-            view: 'month',
+            date: moment().startOf('day'),
+            view: 'day',
             startTime: 8,
             endTime: 20,
             displayWeekend: true,

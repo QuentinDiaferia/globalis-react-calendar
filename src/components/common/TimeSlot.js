@@ -9,9 +9,8 @@ class TimeSlot extends React.Component {
             className: '',
         }
         this.onDrop = this.onDrop.bind(this)
-        this.onDragOver = this.onDragOver.bind(this)
         this.onDragEnter = this.onDragEnter.bind(this)
-        this.onDragLeave = this.onDragLeave.bind(this)
+        this.onDragOver = this.onDragOver.bind(this)
     }
 
     onDragOver(e) {
@@ -19,30 +18,22 @@ class TimeSlot extends React.Component {
     }
 
     onDragEnter(e) {
-        this.setState({
-            className: 'drag'
-        })
-    }
-
-    onDragLeave(e) {
-        this.setState({
-            className: ''
-        })
+        this.props.onDragEnter(this.props.date.date(), this.props.hour)
     }
 
     onDrop(e) {
         e.preventDefault()
-        this.setState({
-            className: ''
-        })
         const eventId = e.dataTransfer.getData('eventId')
         this.props.onDropEvent(eventId, this.props.date, this.props.hour)
     }
 
     render() {
         let className = 'Calendar-Day-Grid-Content-TimeSlot'
-        if (this.state.className) {
-            className += ` ${this.state.className}`
+        if (this.props.hoveredTimeSlot
+            && this.props.hoveredTimeSlot.hour === this.props.hour
+            && this.props.hoveredTimeSlot.day === this.props.date.date()
+        ) {
+            className += ' drag'
         }
         return <div
             className={className}
@@ -59,6 +50,8 @@ TimeSlot.propTypes = {
     date: PropTypes.object.isRequired,
     hour: PropTypes.number.isRequired,
     onDropEvent: PropTypes.func.isRequired,
+    onDragEnter: PropTypes.func.isRequired,
+    hoveredTimeSlot: PropTypes.object,
 }
 
 export default TimeSlot

@@ -13,12 +13,14 @@ class Calendar extends React.Component {
         this.state = {
             events: props.events.sort((e1, e2) => e1.start.diff(e2.start)),
             displayTooltip: null,
+            hoveredTimeSlot: null,
         }
+        this.toggleTooltip = this.toggleTooltip.bind(this)
+        this.closeTooltip = this.closeTooltip.bind(this)
         this.onClickDay = this.onClickDay.bind(this)
         this.onClickMore = this.onClickMore.bind(this)
         this.onDropEvent = this.onDropEvent.bind(this)
-        this.toggleTooltip = this.toggleTooltip.bind(this)
-        this.closeTooltip = this.closeTooltip.bind(this)
+        this.onDragEnter = this.onDragEnter.bind(this)
     }
 
     toggleTooltip(eventId) {
@@ -60,7 +62,19 @@ class Calendar extends React.Component {
             }
             return event
         })
-        this.setState({events})
+        this.setState({
+            events,
+            hoveredTimeSlot: null,
+        })
+    }
+
+    onDragEnter(day, hour) {
+        this.setState({
+            hoveredTimeSlot: {
+                day,
+                hour,
+            }
+        })
     }
 
     renderMonth() {
@@ -96,6 +110,8 @@ class Calendar extends React.Component {
             toggleTooltip={this.toggleTooltip}
             closeTooltip={this.closeTooltip}
             displayTooltip={this.state.displayTooltip}
+            onDragEnter={this.onDragEnter}
+            hoveredTimeSlot={this.state.hoveredTimeSlot}
         />
     }
 
@@ -116,6 +132,8 @@ class Calendar extends React.Component {
             toggleTooltip={this.toggleTooltip}
             closeTooltip={this.closeTooltip}
             displayTooltip={this.state.displayTooltip}
+            onDragEnter={this.onDragEnter}
+            hoveredTimeSlot={this.state.hoveredTimeSlot}
         />
     }
 
@@ -152,7 +170,7 @@ Calendar.propTypes = {
 
 Calendar.defaultProps = {
     view: 'month',
-    date: moment(),
+    date: moment().startOf('day'),
     events: [],
     startTime: 8,
     endTime: 20,

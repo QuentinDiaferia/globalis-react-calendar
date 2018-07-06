@@ -25,6 +25,8 @@ class Week extends React.Component {
                 toggleTooltip={this.props.toggleTooltip}
                 closeTooltip={this.props.closeTooltip}
                 displayTooltip={this.props.displayTooltip}
+                onDragEnter={this.props.onDragEnter}
+                hoveredTimeSlot={this.props.hoveredTimeSlot}
             />
         </div>
     }
@@ -41,6 +43,8 @@ Week.propTypes = {
     toggleTooltip: PropTypes.func.isRequired,
     closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.number,
+    onDragEnter: PropTypes.func.isRequired,
+    hoveredTimeSlot: PropTypes.object,
 }
 
 export default Week

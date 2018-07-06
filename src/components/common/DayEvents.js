@@ -27,7 +27,7 @@ class DayEvents extends React.Component {
 
             const top = (100 / timeSpan) * beginning
             const height = (100 / timeSpan) * duration
-            const width = 100 / event.maxOverlap
+            const width = 90 / event.maxOverlap
             const left = event.hindex * width
 
             const style = {
@@ -95,6 +95,8 @@ class DayEvents extends React.Component {
                     hour={i}
                     date={this.props.date}
                     onDropEvent={this.props.onDropEvent}
+                    onDragEnter={this.props.onDragEnter}
+                    hoveredTimeSlot={this.props.hoveredTimeSlot}
                 />
             )
         }
@@ -138,6 +140,8 @@ DayEvents.propTypes = {
     toggleTooltip: PropTypes.func.isRequired,
     closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.number,
+    onDragEnter: PropTypes.func.isRequired,
+    hoveredTimeSlot: PropTypes.object,
 }
 
 export default DayEvents
