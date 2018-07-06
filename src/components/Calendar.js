@@ -170,7 +170,7 @@ Calendar.propTypes = {
 
 Calendar.defaultProps = {
     view: 'month',
-    date: moment(),
+    date: moment().startOf('day'),
     events: [],
     startTime: 8,
     endTime: 20,
