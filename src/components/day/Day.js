@@ -17,6 +17,8 @@ class Day extends React.Component {
             closeTooltip,
             displayTooltip,
             components,
+            onDragEnter,
+            hoveredTimeSlot,
         } = this.props
         return <div className="Calendar-Day">
             <TimeSlotsHeader
@@ -33,6 +35,8 @@ class Day extends React.Component {
                 toggleTooltip={toggleTooltip}
                 closeTooltip={closeTooltip}
                 displayTooltip={displayTooltip}
+                onDragEnter={onDragEnter}
+                hoveredTimeSlot={hoveredTimeSlot}
             />
         </div>
     }
@@ -48,6 +52,8 @@ Day.propTypes = {
     toggleTooltip: PropTypes.func.isRequired,
     closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.number,
+    onDragEnter: PropTypes.func.isRequired,
+    hoveredTimeSlot: PropTypes.object,
 }
 
 export default Day

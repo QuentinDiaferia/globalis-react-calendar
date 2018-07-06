@@ -14,7 +14,7 @@ class App extends React.Component {
         super(props)
         this.state = {
             date: moment(),
-            view: 'month',
+            view: 'day',
             startTime: 8,
             endTime: 20,
             displayWeekend: true,

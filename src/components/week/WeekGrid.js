@@ -17,6 +17,8 @@ class WeekGrid extends React.Component {
             toggleTooltip,
             closeTooltip,
             displayTooltip,
+            onDragEnter,
+            hoveredTimeSlot,
         } = this.props
         return <div className="Calendar-Week-Grid">
             <TimeSlotsHeader
@@ -39,6 +41,8 @@ class WeekGrid extends React.Component {
                     toggleTooltip={toggleTooltip}
                     closeTooltip={closeTooltip}
                     displayTooltip={displayTooltip}
+                    onDragEnter={onDragEnter}
+                    hoveredTimeSlot={hoveredTimeSlot}
                 />
             })}
         </div>
@@ -56,6 +60,8 @@ WeekGrid.propTypes = {
     toggleTooltip: PropTypes.func.isRequired,
     closeTooltip: PropTypes.func.isRequired,
     displayTooltip: PropTypes.number,
+    onDragEnter: PropTypes.func.isRequired,
+    hoveredTimeSlot: PropTypes.object,
 }
 
 export default WeekGrid
