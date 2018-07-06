@@ -5,112 +5,130 @@ import ToolBar from './components/ToolBar'
 import Navigation from './components/Navigation'
 import ViewSwitcher from './components/ViewSwitcher'
 import SettingsForm from './components/SettingsForm'
+import {navigation, views} from './utils/constants'
 
-const colors = [null, '#33b679', '#3f51b5']
-const start = moment('2018-05-01').startOf('month')
-const events = []
-for (let i = 1; i < 5000; i++) {
-    events.push({
-        id: i,
-        label: "Un événement",
-        start: moment(start),
-        end: moment(start.add(2, 'h')),
-        hex_color: colors[i % 3],
-    })
-}
-
-const events2 = [
-    {
-        id: 1,
-        label: "1",
-        start: moment().hour(13).startOf('hour'),
-        end: moment().hour(13).startOf('hour').add(1, 'hour'),
-        hex_color: '#3f51b5',
-    },
-    {
-        id: 2,
-        label: "2",
-        start: moment().hour(13).startOf('hour'),
-        end: moment().hour(13).startOf('hour').add(1.5, 'hour'),
-        hex_color: '#33b679',
-    },
-    {
-        id: 3,
-        label: "3",
-        start: moment().hour(15).startOf('hour'),
-        end: moment().hour(15).startOf('hour').add(2, 'hour'),
-    },
-    {
-        id: 4,
-        label: "4",
-        start: moment().hour(11).startOf('hour'),
-        end: moment().hour(11).startOf('hour').add(3, 'hour'),
-        hex_color: '#33b679',
-    },
-    {
-        id: 5,
-        label: "5",
-        start: moment().hour(11).startOf('hour'),
-        end: moment().hour(11).startOf('hour').add(1, 'hour'),
-    },
-    {
-        id: 6,
-        label: "6",
-        start: moment('2018-07-31').hour(11).startOf('hour'),
-        end: moment('2018-07-31').hour(11).startOf('hour').add(1, 'hour'),
-    },
-    {
-        id: 7,
-        label: "7",
-        start: moment('2018-08-05').hour(11).startOf('hour'),
-        end: moment('2018-08-05').hour(11).startOf('hour').add(1, 'hour'),
-    },
-]
-
-const events3 = []
-const start3 = moment('2018-06-25').startOf('day')
-for (let i = 1; i < 2000; i++) {
-    if (start3.hour() < 23) {
-        events3.push({
-            id: i,
-            label: i,
-            start: moment(start3),
-            end: moment(start3).add(1, 'h'),
-            hex_color: colors[i % 3],
-        })
-        start3.add(0.25, 'h')
-    } else {
-        start3.add(1, 'd')
-        start3.startOf('day')
-    }
-}
-
+import {events, events2, events3} from './events'
 
 class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            date: moment(),
+            view: 'month',
+            startTime: 8,
+            endTime: 20,
+            displayWeekend: true,
+            displaySettingsForm: false,
+        }
+        this.onNavigate = this.onNavigate.bind(this)
+        this.changeView = this.changeView.bind(this)
+        this.changeSettings = this.changeSettings.bind(this)
+        this.toggleSettingsForm = this.toggleSettingsForm.bind(this)
+        this.onClickMore = this.onClickMore.bind(this)
+        this.onClickDay = this.onClickDay.bind(this)
+    }
+
+    onNavigate(direction) {
+        let date
+        switch (direction) {
+            case navigation.PREVIOUS:
+                date = moment(this.state.date).subtract(1, this.state.view).startOf('day')
+                break
+            case navigation.NEXT:
+                date = moment(this.state.date).add(1, this.state.view).startOf('day')
+                break
+            case navigation.TODAY:
+            default:
+                date = moment().startOf('day')
+                break
+        }
+        this.setState({
+            date,
+        })
+    }
+
+    changeView(view) {
+        let date = moment(this.state.date)
+        if (this.state.view !== views.DAY) {
+            date.startOf('week')
+        }
+        this.setState({
+            date,
+            view,
+        })
+    }
+
+    changeSettings(startTime, endTime, displayWeekend) {
+        this.setState({
+            startTime,
+            endTime,
+            displayWeekend,
+            displaySettingsForm: false,
+        })
+    }
+
+    toggleSettingsForm() {
+        this.setState({
+            displaySettingsForm: !this.state.displaySettingsForm,
+        })
+    }
+
+    onClickMore(date) {
+        this.setState({
+            view: views.DAY,
+            date,
+        })
+    }
+
+    onClickDay(date) {
+        this.setState({
+            date,
+            view: views.DAY,
+            displayTooltip: null,
+        })
+    }
+
     render() {
-        return <Calendar
-            view='week'
-            events={events2}
-            startTime={8}
-            endTime={20}
-            displayWeekend={true}
-            language={{
-                label_previous: 'Précédent',
-                label_next: 'Suivant',
-                label_today: 'Aujourd\'hui',
-                label_view_month: 'Mois',
-                label_view_week: 'Semaine',
-                label_view_day: 'Jour',
-                label_more_link: 'autres',
-                label_settings: 'Config',
-            }}
-            components={{
-                toolbar: ToolBar,
-                navigation: Navigation,
-                viewSwitcher: ViewSwitcher,
-                settingsForm: SettingsForm,
-            }}
-        />
+        const language = {
+            label_previous: 'Précédent',
+            label_next: 'Suivant',
+            label_today: 'Aujourd\'hui',
+            label_view_month: 'Mois',
+            label_view_week: 'Semaine',
+            label_view_day: 'Jour',
+            label_more_link: 'autres',
+            label_settings: 'Config',
+        }
+        return <React.Fragment>
+            <ToolBar
+                date={this.state.date}
+                view={this.state.view}
+                onNavigate={this.onNavigate}
+                changeView={this.changeView}
+                toggleSettingsForm={this.toggleSettingsForm}
+                language={language}
+            />
+            {this.state.displaySettingsForm &&
+                <SettingsForm
+                    changeSettings={this.changeSettings}
+                    displayWeekend={this.state.displayWeekend}
+                    startTime={this.state.startTime}
+                    endTime={this.state.endTime}
+                    language={language}
+                />
+            }
+            <Calendar
+                view={this.state.view}
+                date={this.state.date}
+                startTime={this.state.startTime}
+                endTime={this.state.endTime}
+                displayWeekend={this.state.displayWeekend}
+                onClickMore={this.onClickMore}
+                onClickDay={this.onClickDay}
+                events={events2}
+                language={language}
+            />
+        </React.Fragment>
     }
 }
 
