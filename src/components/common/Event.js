@@ -42,15 +42,16 @@ class Event extends React.Component {
         } = this.props
 
         const TooltipComponent = components.tooltip || null
+        const eventStyle = Object.assign({}, style)
 
         if (event.hex_color) {
-            style.backgroundColor = event.hex_color
+            eventStyle.backgroundColor = event.hex_color
         }
 
         return <React.Fragment>
             <div
                 className='Calendar-Event'
-                style={style}
+                style={eventStyle}
                 key={event.id}
                 draggable={draggable}
                 onDragStart={onDragStart || null}
@@ -66,7 +67,7 @@ class Event extends React.Component {
             {displayTooltip && TooltipComponent &&
                 <TooltipComponent
                     event={event}
-                    topPosition={style.top}
+                    topPosition={eventStyle.top}
                     closeTooltip={closeTooltip}
                 />
             }
